@@ -243,7 +243,7 @@ Table~\ref{tab:model_samples} reports the model-specific analytic samples. The e
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabularx}{\textwidth}{Y p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth}}
 \toprule
-\textbf{Model} & \textbf{Observation level} & \textbf{Analytic observations} & \textbf{Unique respondents} \\
+\textbf{Model} & \textbf{Observation level} & \textbf{N obs.} & \textbf{N respondents} \\
 \midrule
 Emergency savings and marital stability & Respondent-wave & 12,443 & 6,221 \\
 Completed fertility count model & Respondent & 7,556 & 7,556 \\
@@ -270,14 +270,14 @@ The completed-fertility models produced more mixed evidence for financial knowle
 \label{tab:main_results}
 \small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabularx}{\textwidth}{Y Y p{0.15\textwidth} p{0.13\textwidth} p{0.09\textwidth} p{0.06\textwidth} p{0.16\textwidth}}
+\begin{tabularx}{\textwidth}{Y Y p{0.15\textwidth} p{0.13\textwidth} p{0.13\textwidth} p{0.16\textwidth}}
 \toprule
-\textbf{Outcome} & \textbf{Predictor} & \textbf{Model} & \textbf{Estimate (SE)} & \textbf{Statistic} & \textbf{$p$} & \textbf{95\% CI} \\
+\textbf{Outcome} & \textbf{Predictor} & \textbf{Model} & \textbf{Estimate (SE)} & \textbf{Test} & \textbf{95\% CI} \\
 \midrule
-Marital stability & Emergency savings & Respondent FE LPM & 0.029 (0.009) & $t = 3.23$ & .001 & [0.011, 0.046] \\
-Completed fertility & Financial-literacy score & Poisson & -0.010 (0.008) & $z = -1.32$ & .185 & [-0.026, 0.005] \\
-Completed fertility & Birth-control education & Poisson & -0.038 (0.017) & $z = -2.22$ & .026 & [-0.071, -0.004] \\
-Timing of first birth & Birth-control education & Cox PH & 0.930 (0.024) & $z = -2.96$ & .003 & [0.887, 0.976] \\
+Marital stability & Emergency savings & Respondent FE LPM & 0.029 (0.009) & $t = 3.23$, $p = .001$ & [0.011, 0.046] \\
+Completed fertility & Financial-literacy score & Poisson & -0.010 (0.008) & $z = -1.32$, $p = .185$ & [-0.026, 0.005] \\
+Completed fertility & Birth-control education & Poisson & -0.038 (0.017) & $z = -2.22$, $p = .026$ & [-0.071, -0.004] \\
+Timing of first birth & Birth-control education & Cox PH & 0.930 (0.024) & $z = -2.96$, $p = .003$ & [0.887, 0.976] \\
 \bottomrule
 \end{tabularx}
 \end{adjustbox}
