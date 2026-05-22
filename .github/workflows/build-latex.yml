@@ -8,6 +8,7 @@ on:
       - "tables/**"
       - "figures/**"
       - "submission/**"
+      - "scripts/**"
       - ".github/workflows/build-latex.yml"
   pull_request:
     branches: [main]
@@ -16,6 +17,7 @@ on:
       - "tables/**"
       - "figures/**"
       - "submission/**"
+      - "scripts/**"
       - ".github/workflows/build-latex.yml"
   workflow_dispatch:
 
@@ -38,6 +40,11 @@ jobs:
             texlive-fonts-recommended \
             texlive-bibtex-extra \
             biber
+
+      - name: Apply JFEI pre-submission cleanup
+        run: |
+          python3 scripts/jfei_pre_submission_cleanup.py
+          git diff -- manuscript/NLS-79.tex
 
       - name: Build manuscript
         working-directory: manuscript
