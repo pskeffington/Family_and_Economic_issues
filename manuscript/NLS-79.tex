@@ -294,15 +294,19 @@ Timing of first birth & Birth-control education & Cox PH & 0.930 (0.024) & $z = 
 \end{minipage}
 \end{table}
 
+% ************************************************************
+% SENSITIVITY AND DIAGNOSTIC SUMMARY
+% ************************************************************
+
 \subsection{Sensitivity and Diagnostic Summary}
 
-Sensitivity checks support the main interpretation while also clarifying the limits of the evidence. The negative binomial model for completed fertility was estimated to evaluate whether the fertility associations were sensitive to overdispersion in the count outcome. The direction of the birth-control education association remained negative, while the financial-literacy association remained substantively small. This pattern indicates that the main fertility conclusions are not driven solely by the Poisson distributional assumption.
+Sensitivity checks support the main interpretation while clarifying the limits of the evidence. The completed-fertility count model showed only modest overdispersion relative to the Poisson variance assumption, with a Pearson overdispersion ratio of 1.049. The negative binomial specification produced a theta estimate of 40.264, indicating limited overdispersion in that parameterization. In that robustness model, the incidence rate ratio for birth-control education was 0.963, consistent with the negative association reported in the primary Poisson model.
 
-The Cox proportional hazards model provides a timing-based check for the birth-control education result. The model included 10,777 respondents and 7,747 observed first-birth events. The hazard ratio below one indicates that respondents exposed to adolescent birth-control education had a lower observed hazard of first birth at a given time; however, the global proportional-hazards diagnostic was statistically significant ($p < .001$), suggesting possible violation of the proportional-hazards assumption. The timing result therefore complements the completed-fertility result but is treated as supportive evidence rather than independently dispositive evidence of a stable hazard-ratio relationship across the observation period.
+The Cox proportional hazards model provides timing-based evidence for the birth-control education result. The model included 10,777 respondents and 7,747 observed first-birth events. The global proportional-hazards diagnostic was statistically significant ($p < .001$), indicating possible violation of the proportional-hazards assumption. The timing estimate is therefore interpreted as supportive evidence of later entry into parenthood among respondents exposed to birth-control education, not as definitive evidence of a constant hazard-ratio relationship across the full observation period.
 
-Diagnostic review also reinforces the need for cautious interpretation. Emergency savings are measured only in later waves, so the fixed-effects model estimates within-person associations over the observed adult period rather than over the full life course. Financial-literacy items are also available only in selected later waves, limiting the ability to distinguish long-standing financial knowledge from knowledge accumulated after family formation. Birth-control education is measured retrospectively and does not capture curriculum quality, contraceptive access, or actual contraceptive behavior. These measurement constraints support interpreting the results as structured associations rather than causal estimates.
+Diagnostic review reinforces the need for cautious interpretation. Emergency savings are measured only in later waves, so the fixed-effects model estimates within-person associations over the observed adult period rather than over the full life course. Financial-literacy items are also available only in selected later waves, limiting the ability to distinguish long-standing financial knowledge from knowledge accumulated after family formation. Birth-control education is measured retrospectively and does not capture curriculum quality, contraceptive access, or actual contraceptive behavior. These measurement constraints support interpreting the results as structured associations rather than causal estimates.
 
-Table~\ref{tab:robustness} summarizes model diagnostics and sensitivity checks rather than presenting an additional table of exact model coefficients. It is included to document why the primary estimates in Table~\ref{tab:main_results} are interpreted cautiously and why the sensitivity evidence is treated as supportive rather than independently dispositive.
+Table~\ref{tab:robustness} reports exact diagnostic values from the final analytic output. These diagnostics support the use of the negative binomial model as a robustness check for completed fertility and reinforce the cautious interpretation of the Cox timing estimate.
 
 \begin{table}[!htbp]
 \centering
@@ -310,23 +314,31 @@ Table~\ref{tab:robustness} summarizes model diagnostics and sensitivity checks r
 \label{tab:robustness}
 \small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabularx}{\textwidth}{Y p{0.28\textwidth} Y}
+\begin{tabularx}{\textwidth}{Y p{0.18\textwidth} Y}
 \toprule
-\textbf{Check} & \textbf{Purpose} & \textbf{Interpretation} \\
+\textbf{Check} & \textbf{Exact value} & \textbf{Interpretation} \\
 \midrule
-Negative binomial count model & Assess sensitivity to overdispersion in completed fertility & Birth-control education remains negatively associated with completed fertility; financial literacy remains substantively small. \\
-Cox proportional hazards model & Assess timing of first birth & Birth-control education is associated with a lower hazard of first birth, but a significant global diagnostic test suggests the timing estimate should be interpreted cautiously. \\
-Cox first-birth events & Document event count in the timing model & The Cox estimation sample includes 7,747 observed first-birth events among 10,777 respondents. \\
-Respondent fixed effects & Adjust for time-invariant respondent characteristics & Emergency savings are positively associated with marital stability within respondents over time. \\
-Model-specific samples & Preserve available observations across uneven measurement waves & Sample sizes differ by model because emergency savings, financial literacy, fertility, and birth-control education are not observed in every wave. \\
+Poisson overdispersion ratio & 1.049 & Values above 1 indicate overdispersion relative to the Poisson variance assumption. \\
+Negative binomial theta & 40.264 & Larger theta indicates less overdispersion in the negative binomial parameterization. \\
+Birth-control education IRR in negative binomial model & 0.963 & Robustness estimate for the birth-control education association with completed fertility. \\
+Cox first-birth events & 7,747 & Number of observed first-birth events in the Cox estimation sample; this is not the same as the respondent-level analytic sample size. \\
+Cox proportional hazards global test & $< .001$ & Significant global test suggests possible proportional-hazards assumption violation; Cox timing estimates should be interpreted cautiously. \\
 \bottomrule
 \end{tabularx}
 \end{adjustbox}
 \begin{minipage}{0.95\textwidth}
 \footnotesize
-\textit{Notes:} This table summarizes diagnostic and sensitivity checks; exact primary model estimates are reported in Table~\ref{tab:main_results}. The checks are interpreted as sensitivity evidence, not as proof of causal identification.
+\textit{Notes:} IRR = incidence rate ratio. Exact values are from the final analytic output. This table summarizes sensitivity and diagnostic checks rather than primary model estimates. Primary estimates are reported in Table~\ref{tab:main_results}.
 \end{minipage}
 \end{table}
+
+% ************************************************************
+% END RESULTS
+% ************************************************************
+% SECTION BREAK
+% ************************************************************
+% DISCUSSION
+% ************************************************************
 
 % ************************************************************
 % END RESULTS
