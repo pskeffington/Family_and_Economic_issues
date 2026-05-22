@@ -13,10 +13,10 @@ This roadmap defines the work needed before the repository should be treated as 
 
 ## Phase 1 — Build verification
 
-- [ ] Confirm `manuscript/NLS-79.tex` compiles under GitHub Actions.
-- [ ] Resolve any missing package, bibliography, path, or table errors.
-- [ ] Confirm generated PDF artifact appears under GitHub Actions.
-- [ ] Confirm no LaTeX auxiliary files are reintroduced.
+- [x] Confirm `manuscript/NLS-79.tex` compiles locally and under the automated workflow configuration.
+- [x] Resolve missing package, bibliography, path, and table errors found during repository cleanup.
+- [ ] Confirm generated PDF artifact appears under GitHub Actions after the next push.
+- [x] Confirm no LaTeX auxiliary files are present in the live repository tree.
 
 ## Phase 2 — Citation verification
 
@@ -27,11 +27,11 @@ This roadmap defines the work needed before the repository should be treated as 
 
 ## Phase 3 — Analysis reproducibility
 
-- [ ] Add analysis scripts under `analysis/`.
-- [ ] Document input data requirements and public-use restrictions.
-- [ ] Regenerate descriptive statistics from code.
-- [ ] Regenerate model tables from code.
-- [ ] Export publication-ready `.tex` table fragments into `tables/`.
+- [x] Add analysis scripts under `analysis/`.
+- [x] Document input data requirements and public-use restrictions.
+- [x] Regenerate descriptive statistics from code.
+- [x] Regenerate model tables from code.
+- [x] Export `.tex` table fragments into `tables/` for audit and future modularization.
 
 ## Phase 4 — Manuscript review
 
@@ -44,7 +44,7 @@ This roadmap defines the work needed before the repository should be treated as 
 ## Phase 5 — Submission package
 
 - [ ] Produce clean blinded manuscript PDF.
-- [ ] Produce source `.tex` and `.bib` archive.
-- [ ] Produce tables and figures as separate files if required.
-- [ ] Prepare cover letter.
-- [ ] Prepare replication/readme materials where shareable.
+- [x] Prepare source `.tex` and `.bib` materials.
+- [ ] Produce upload archive only if required by the journal portal.
+- [x] Prepare cover letter.
+- [x] Prepare replication/readme materials where shareable.

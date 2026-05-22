@@ -1,5 +1,0 @@
-"Check","Exact value","Interpretation"
-"Poisson overdispersion ratio","1.049","Values above 1 indicate overdispersion relative to the Poisson variance assumption."
-"Negative binomial theta","40.264","Larger theta indicates less overdispersion in the negative binomial parameterization."
-"Birth-control education IRR in negative binomial model","0.963","Robustness estimate for the birth-control education association with completed fertility."
-"Cox proportional hazards global test","< .001","Non-significant global test supports the proportional-hazards assumption."

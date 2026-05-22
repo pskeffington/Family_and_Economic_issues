@@ -5,8 +5,8 @@ Target journal: *Journal of Family and Economic Issues*
 ## Files to upload
 
 - `NLS-79.pdf` — blinded manuscript PDF generated from GitHub Actions artifact `NLS-79-compiled-pdf`.
-- `manuscript/NLS-79.tex` — editable blinded LaTeX manuscript source.
-- `manuscript/references.bib` — manuscript bibliography.
+- `manuscript/NLS-79.tex` — editable blinded LaTeX manuscript source, if the portal requests source files.
+- `manuscript/references.bib` — manuscript bibliography, if the portal requests source files.
 - `submission/title_page.tex` — unblinded title page with author, affiliations, email, ORCID, and declarations.
 - `submission/cover_letter.md` — cover letter text for the submission portal.
 - `submission/author_disclosures.md` — disclosure statements for portal fields.
@@ -17,6 +17,7 @@ Target journal: *Journal of Family and Economic Issues*
 - Raw NLSY79 extract files.
 - Local `.dat`, `.csv`, `.sdf`, `.sas`, `.sps`, `.dct`, `.cdb`, or `.NLSY79` data files.
 - LaTeX build artifacts such as `.aux`, `.bbl`, `.blg`, `.fdb_latexmk`, `.fls`, `.log`, or `.out`.
+- Generated upload folders, ZIP archives, Word exports, or local PDF builds unless specifically requested by the portal.
 - Local helper scripts or patch files used during cleanup.
 - Unblinded title-page material inside the blinded manuscript.
 

@@ -9,8 +9,8 @@ High-priority contributions include:
 - verifying citations against DOI records, publisher pages, PubMed, CrossRef, NBER, BLS, NLS Investigator, or official reports;
 - checking in-text citation and bibliography parity;
 - improving LaTeX compilation stability;
-- moving generated model output into clean `.tex` table fragments under `tables/`;
-- documenting R or Python scripts needed to reproduce model outputs;
+- maintaining generated model-output audit files under `tables/`;
+- documenting R scripts needed to reproduce model outputs;
 - identifying unsupported causal language;
 - improving journal-format alignment for the *Journal of Family and Economic Issues*;
 - checking whether reported model estimates match the underlying analytic outputs.
@@ -25,13 +25,13 @@ manuscript/
   references.bib
 
 tables/
-  generated .tex table fragments
-
-figures/
-  manuscript figures
+  generated CSV and .tex audit outputs
 
 analysis/
   analysis scripts and reproducibility notes
+
+submission/
+  source submission-support files kept separate from the blinded manuscript
 ```
 
 Do not commit LaTeX build artifacts such as `.aux`, `.bbl`, `.blg`, `.log`, `.out`, `.toc`, `.fls`, or `.fdb_latexmk` files.
@@ -52,7 +52,7 @@ A useful pull request should explain:
 - why the change was needed;
 - whether the manuscript still compiles;
 - whether any citation or estimate was verified;
-- whether the change affects tables, figures, references, or interpretation.
+- whether the change affects tables, submission files, references, or interpretation.
 
 ## Current status
 

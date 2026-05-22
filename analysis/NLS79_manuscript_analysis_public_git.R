@@ -355,7 +355,7 @@ if (use_precomputed_fe) {
   m1_result <- robust_row_lm_glm(m1_fe, "emergency_savings_dm", "Respondent FE LPM", "Marital stability", "Emergency savings", m1_vcov, FALSE)
   m1_result$Statistic <- sub("z =", "t =", m1_result$Statistic)
   m1_n_obs <- model_n(m1_fe)
-  m1_n_respondents <- dplyr::n_distinct(stats::model.frame(m1_fe)$id)
+  m1_n_respondents <- dplyr::n_distinct(marital_panel$id[as.integer(rownames(stats::model.frame(m1_fe)))])
 }
 
 poisson_data <- analysis_person |>

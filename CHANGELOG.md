@@ -15,12 +15,15 @@ All notable repository-level changes will be documented here.
 
 ### Changed
 
-- Organized live repository tree around `manuscript/`, `.github/workflows/`, and future `tables/`, `figures/`, and `analysis/` paths.
+- Organized live repository tree around `manuscript/`, `analysis/`, `tables/`, `submission/`, and `.github/workflows/`.
 - Moved manuscript source files into `manuscript/`.
+- Added analysis outputs, reproducibility documentation, and submission-support source files.
+- Clarified generated audit tables and local-only submission packaging artifacts.
 
 ### Removed
 
 - Removed LaTeX build artifacts from the live repository tree.
+- Removed stale legacy robustness diagnostics table artifacts superseded by `table3_sensitivity_diagnostics.*`.
 
 ### Status
 

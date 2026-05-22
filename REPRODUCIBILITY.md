@@ -16,6 +16,20 @@ The script searches for input files in `NLS79 DATA/`, `NLS79_DATA/`, `data/`, `D
 NLS79_DATA_DIR="NLS79 DATA" Rscript analysis/NLS79_manuscript_analysis_public_git.R
 ```
 
+The script uses the following R packages and will attempt to install any that are missing:
+
+```text
+dplyr
+tidyr
+tibble
+purrr
+sandwich
+lmtest
+MASS
+survival
+knitr
+```
+
 ## Required inputs
 
 The script expects two public-use NLSY79 CSV extracts:
@@ -23,6 +37,13 @@ The script expects two public-use NLSY79 CSV extracts:
 ```text
 NLS79-FERTILITY.csv
 NLS79_Data_Raw.csv
+```
+
+For compatibility with the original local extracts, the script also checks for:
+
+```text
+Capstone_data2.csv
+default324.csv
 ```
 
 The following optional file is used when available to preserve the exact respondent fixed-effects estimate already reported in the manuscript:
@@ -41,7 +62,7 @@ The script writes output to `tables/` by default. Override this location with:
 NLS79_OUTPUT_DIR="tables" Rscript analysis/NLS79_manuscript_analysis_public_git.R
 ```
 
-Primary audit outputs:
+Current generated CSV audit outputs committed to the repository are:
 
 ```text
 table1_descriptive_summary.csv
@@ -50,11 +71,16 @@ table2_main_results.csv
 table2b_effect_sizes.csv
 table3_sensitivity_diagnostics.csv
 variable_crosswalk.csv
+```
+
+The script also writes respondent-level and panel analytic audit files locally. These are intentionally not committed because they are derived respondent-level data:
+
+```text
 analytic_marital_panel.csv
 analytic_person_file.csv
 ```
 
-LaTeX fragments are also written for audit and future manuscript modularization:
+Generated LaTeX fragments committed for audit and future manuscript modularization are:
 
 ```text
 table1_descriptive_summary.tex
@@ -63,6 +89,8 @@ table2_main_results.tex
 table3_sensitivity_diagnostics.tex
 variable_crosswalk.tex
 ```
+
+The manuscript currently embeds journal tables directly, so these generated fragments should be treated as audit outputs unless the manuscript is later converted to an `\input{}` workflow.
 
 ## Manuscript tables
 
@@ -81,3 +109,5 @@ The workflow runs from the `manuscript/` directory and uses `manuscript/referenc
 ## Data-use note
 
 The analysis uses de-identified public-use NLSY79 data. Users should obtain public-use extracts through the U.S. Bureau of Labor Statistics / NLS Investigator system and comply with applicable redistribution rules.
+
+Do not commit raw NLSY79 extracts, raw data loaders, or respondent-level analytic files. The repository is designed to share manuscript source, code, metadata, and aggregate audit outputs while keeping raw and derived respondent-level data local.

@@ -25,6 +25,12 @@
 manuscript/*.pdf
 output/
 
+# Generated submission packages / exports
+submission/upload_latex/
+submission/NLS-79_blinded_latex_submission/
+submission/NLS-79_blinded_latex_submission.zip
+submission/Cover_Letter.docx
+
 # Local manuscript helper scripts / patches
 apply_manuscript_polish.py
 fix_bib_final.py
