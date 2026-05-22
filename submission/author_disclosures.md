@@ -2,7 +2,7 @@
 
 ## Manuscript Title
 
-Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79
+Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79
 
 ## Author
 

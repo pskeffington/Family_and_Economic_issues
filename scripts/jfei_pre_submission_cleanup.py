@@ -79,7 +79,7 @@ def main() -> int:
 
     text = re.sub(
         r"\\noindent\s+\\textbf\{Keywords:\}.*",
-        NEW_KEYWORDS,
+        lambda _match: NEW_KEYWORDS,
         text,
         count=1,
     )

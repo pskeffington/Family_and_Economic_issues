@@ -8,7 +8,7 @@ LaTeX manuscript repository for research on family formation, financial prepared
 
 **Working title:** *Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79*
 
-This repository is in pre-submission form. It is organized for reproducible drafting, contributor review, citation verification, model-output audit, and automated LaTeX compilation. The manuscript should not be treated as a final journal submission package until the release checklist below is complete.
+This repository is in pre-submission form. It is organized for reproducible drafting, contributor review, citation verification, model-output audit, and automated LaTeX compilation. The manuscript should not be treated as a final journal submission package until the pre-submission checklist below is complete.
 
 ## Repository structure
 

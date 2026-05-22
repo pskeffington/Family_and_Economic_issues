@@ -58,8 +58,10 @@ def main() -> int:
     diagnostics = read_csv(TABLES / "table3_sensitivity_diagnostics.csv")
     for row in diagnostics:
         value = row["Exact value"]
-        alt = value.replace("<.001", r"< .001")
-        if value not in text and alt not in text:
+        alternates = {value, value.replace("<.001", r"< .001")}
+        if value.isdigit():
+            alternates.add(f"{int(value):,}")
+        if not any(candidate in text for candidate in alternates):
             errors.append(f"Missing Table 3 diagnostic for {row['Check']}: {value}")
 
     forbidden = [

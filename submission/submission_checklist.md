@@ -26,9 +26,9 @@ Target journal: *Journal of Family and Economic Issues*
 
 Article type: Original Paper
 
-Title: Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79
+Title: Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79
 
-Keywords: fertility; family economics; financial literacy; emergency savings; reproductive education; NLSY79
+Keywords: fertility; family economics; financial literacy; emergency savings; birth-control education; NLSY79
 
 Corresponding author: Paul A. Skeffington
 

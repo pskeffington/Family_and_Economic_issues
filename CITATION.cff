@@ -1,18 +1,18 @@
 cff-version: 1.2.0
-title: "Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79"
+title: "Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79"
 message: "If you use this repository, please cite the manuscript and repository."
 type: software
 authors:
   - family-names: Skeffington
     given-names: Paul
 repository-code: "https://github.com/pskeffington/Family_and_Economic_issues"
-abstract: "Reproducible manuscript repository for an NLSY79 analysis of financial preparedness, reproductive education, marital stability, completed fertility, and timing of first birth."
+abstract: "Reproducible manuscript repository for an NLSY79 analysis of financial preparedness, birth-control education, marital stability, completed fertility, and timing of first birth."
 keywords:
   - NLSY79
   - fertility
   - family economics
   - financial preparedness
-  - reproductive education
+  - birth-control education
 license: MIT
 date-released: "2026-05-22"
 version: "pre-submission"

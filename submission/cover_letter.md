@@ -2,7 +2,7 @@
 
 Dear Editor,
 
-Please consider the manuscript titled "Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79" for review as an original article in the *Journal of Family and Economic Issues*.
+Please consider the manuscript titled "Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79" for review as an original article in the *Journal of Family and Economic Issues*.
 
 This manuscript examines how financial preparedness and adolescent reproductive education are associated with long-run family-formation outcomes in the National Longitudinal Survey of Youth 1979 cohort. The study evaluates marital stability, completed fertility, and timing of first birth using respondent fixed-effects panel models, count models, and event-history methods. The findings suggest that emergency savings are positively associated with marital stability, while adolescent exposure to birth-control education is associated with lower completed fertility and later entry into parenthood. Financial literacy is not statistically associated with completed fertility in the primary model.
 
