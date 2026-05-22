@@ -1,0 +1,36 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.ilg
+*.idx
+*.ind
+*.ist
+
+# Generated output
+output/
+
+# R/session artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
