@@ -18,9 +18,9 @@
 \usepackage{adjustbox}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{cmap}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{cmap}
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \setlength{\tabcolsep}{4pt}
@@ -29,6 +29,7 @@
 
 \begin{document}
 \title{Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79}
+\author{}
 \date{}
 \maketitle
 \pagebreak
@@ -252,7 +253,7 @@ Table~\ref{tab:model_samples} reports the model-specific analytic samples. The e
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabularx}{\textwidth}{Y p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth}}
 \toprule
-\textbf{Model} & \textbf{Observation level} & \textbf{N obs.} & \textbf{N respondents} \\
+\textbf{Model} & \textbf{Observation level} & \textbf{Obs.} & \textbf{Respondents} \\
 \midrule
 Emergency savings and marital stability & Respondent-wave & 12,443 & 6,221 \\
 Completed fertility count model & Respondent & 7,556 & 7,556 \\
@@ -373,7 +374,7 @@ Measurement timing also constrains inference. Emergency savings and financial-li
 
 The birth-control education measure is also limited. It captures reported exposure to adolescent instruction about contraception or reproductive health, but it does not measure curriculum quality, instructional intensity, contraceptive access, family norms, religious context, school policy, local health services, or actual contraceptive behavior. Because exposure to birth-control education may be correlated with school environment, family background, community norms, and local policy, the observed association with completed fertility and first-birth timing should not be interpreted as a clean causal estimate of curriculum exposure.
 
-The timing model adds an additional constraint. The global proportional-hazards diagnostic was statistically significant, indicating possible violation of the Cox model's proportional-hazards assumption. The estimated hazard ratio for birth-control education is therefore best treated as supportive timing evidence that points in the same direction as the completed-fertility result. It should not be read as evidence of a constant hazard-ratio relationship across the full observation period.
+The timing model adds an additional constraint. The global Cox diagnostic was statistically significant, indicating possible violation of the model assumption. The estimated hazard ratio for birth-control education is therefore best treated as supportive timing evidence that points in the same direction as the completed-fertility result. It should not be read as evidence of a constant hazard-ratio relationship across the full observation period.
 
 The model-specific sample design preserves available information but creates differences in analytic samples across outcomes. Emergency savings, financial literacy, marital status, fertility histories, and birth-control education are not observed uniformly across all respondents and waves. As a result, estimates from one model should not be read as if they came from the same balanced sample as estimates from another model. The descriptive values and model-specific sample sizes reported in the Results section are therefore essential for interpreting the scope of each estimate.
 
@@ -443,6 +444,7 @@ The author was responsible for conceptualization, data construction, analysis, i
 % REFERENCES
 % ************************************************************
 
+\renewcommand{\refname}{\centering References}
 \bibliographystyle{apalike}
 \bibliography{references}
 
