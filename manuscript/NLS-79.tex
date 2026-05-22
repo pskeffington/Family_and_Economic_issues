@@ -16,6 +16,9 @@
 \usepackage{array}
 \usepackage{tabularx}
 
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
 \doublespacing
 
 \begin{document}
@@ -29,7 +32,6 @@
 % ************************************************************
 
 \begin{abstract}
-Fertility decline, delayed family formation, and household financial insecurity have renewed interest in the economic conditions that shape long-run family outcomes. This study examines whether financial preparedness and adolescent reproductive education are associated with marital stability, completed fertility, and timing of first birth among respondents in the National Longitudinal Survey of Youth 1979 cohort. The analysis draws on repeated measures of marital status, emergency savings, financial literacy, fertility, and birth-control education. Fixed-effects panel models are used to estimate within-person associations between emergency savings and marital stability. Poisson and negative binomial count models are used to examine completed fertility, and Cox proportional hazards models are used to assess timing of first birth. Results indicate that emergency savings are positively associated with marital stability ($b = 0.029$, $SE = 0.009$, $p = .001$). Financial literacy is not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $p = .185$). Adolescent exposure to birth-control education is associated with lower completed fertility ($b = -0.038$, $SE = 0.017$, $p = .026$) and later entry into parenthood ($HR = 0.930$, log-HR $SE = 0.024$, $p = .003$). These findings suggest that financial liquidity and reproductive education operate through distinct life-course pathways: emergency savings are linked to household continuity, while reproductive education is linked to fertility timing and family size. The study contributes to family economics by integrating financial preparedness, reproductive education, and fertility outcomes within a single longitudinal framework, while emphasizing that the results are associational rather than causal.
 \end{abstract}
 
 % ************************************************************
@@ -188,7 +190,7 @@ h_i(t) = h_0(t)\exp(\beta_{1}BirthControlEducation_i + \boldsymbol{\theta}W_i)
 
 In Equation 4, \(h_i(t)\) is the hazard of first birth for respondent \(i\) at time \(t\), \(h_0(t)\) is the unspecified baseline hazard, \(BirthControlEducation_i\) is an indicator for adolescent exposure to birth-control education, and \(W_i\) is a vector of respondent-level controls including sex, race and ethnicity, and educational attainment. The exponentiated coefficient for birth-control education is interpreted as a hazard ratio. A hazard ratio below one indicates that birth-control education is associated with a lower hazard of first birth at a given time, consistent with later entry into parenthood.
 
-All estimates are interpreted as associations. The fixed-effects model strengthens within-person comparison by adjusting for time-invariant respondent characteristics, but it does not eliminate bias from time-varying unobserved factors. The count models estimate associations with completed fertility but do not establish that financial literacy or birth-control education caused differences in fertility. The Cox model estimates differences in timing of first birth associated with birth-control education but cannot fully separate education exposure from family background, school context, local norms, or access to contraception.
+All estimates are interpreted as associations. The fixed-effects model strengthens within-person comparison by adjusting for time-invariant respondent characteristics, but it does not eliminate bias from time-varying unobserved factors. The count models estimate associations with completed fertility but do not establish that financial literacy or birth-control education caused differences in fertility. The Cox model estimates differences in timing of first birth associated with birth-control education but cannot fully separate education exposure from family background, school context, local norms, or access to contraception. Because the proportional-hazards diagnostic test was statistically significant in the final audit output, the Cox model is treated as supportive timing evidence rather than as definitive evidence of a constant hazard ratio across the observation period.
 
 % ************************************************************
 % END DATA AND METHODS
@@ -208,8 +210,9 @@ Table~\ref{tab:descriptive_summary} reports exact descriptive values for the cor
 \centering
 \caption{Descriptive Summary of Core Analytic Measures}
 \label{tab:descriptive_summary}
+\small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{p{0.30\textwidth}p{0.18\textwidth}p{0.22\textwidth}p{0.30\textwidth}}
+\begin{tabularx}{\textwidth}{Y p{0.18\textwidth} p{0.20\textwidth} Y}
 \toprule
 \textbf{Measure} & \textbf{Exact value} & \textbf{Level} & \textbf{Primary model use} \\
 \midrule
@@ -218,7 +221,7 @@ Emergency savings reported & 42.7\% & Respondent-wave & Marital-stability model 
 Financial-literacy index & 3.182 & Respondent / wave-specific & Completed fertility model \\
 Birth-control education exposure & 59.0\% & Respondent & Fertility timing and completed fertility models \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{adjustbox}
 \begin{minipage}{0.95\textwidth}
 \footnotesize
@@ -232,17 +235,18 @@ Table~\ref{tab:model_samples} reports the model-specific analytic samples. The e
 \centering
 \caption{Model-Specific Analytic Samples}
 \label{tab:model_samples}
+\small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{p{0.46\textwidth}p{0.20\textwidth}p{0.17\textwidth}p{0.17\textwidth}}
+\begin{tabularx}{\textwidth}{Y p{0.20\textwidth} p{0.16\textwidth} p{0.16\textwidth}}
 \toprule
-\textbf{Model} & \textbf{Observation level} & \textbf{Analytic observations} & \textbf{Unique respondents} \\
+\textbf{Model} & \textbf{Observation level} & \textbf{N obs.} & \textbf{N respondents} \\
 \midrule
 Emergency savings and marital stability & Respondent-wave & 12,443 & 6,221 \\
 Completed fertility count model & Respondent & 7,556 & 7,556 \\
 Negative binomial robustness & Respondent & 7,556 & 7,556 \\
 Timing of first birth & Respondent & 10,777 & 10,777 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{adjustbox}
 \begin{minipage}{0.95\textwidth}
 \footnotesize
@@ -254,26 +258,27 @@ Timing of first birth & Respondent & 10,777 & 10,777 \\
 
 Table~\ref{tab:main_results} reports the primary model estimates. In the respondent fixed-effects linear probability model, emergency savings were positively associated with marital stability. Within respondents, having an emergency fund sufficient to cover three months of expenses was associated with a 0.029 increase in the probability of being married or remarried rather than separated, divorced, widowed, or never married ($SE = 0.009$, $t = 3.23$, $p = .001$, 95\% CI [0.011, 0.046]). This estimate corresponds to an approximately 2.9 percentage-point within-person difference in marital stability across observed financial-preparedness states.
 
-The completed-fertility models produced more mixed evidence for financial knowledge. The financial-literacy score was not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $z = -1.32$, $p = .185$, 95\% CI [-0.026, 0.005]). In contrast, adolescent birth-control education was negatively associated with completed fertility ($b = -0.038$, $SE = 0.017$, $z = -2.22$, $p = .026$, 95\% CI [-0.071, -0.004]). The Cox proportional hazards model for timing of first birth also indicated a lower hazard of first birth among respondents exposed to birth-control education ($HR = 0.930$, log-HR $SE = 0.024$, $z = -2.96$, $p = .003$, 95\% CI [0.887, 0.976]). These estimates are consistent with an association between reproductive education, lower completed fertility, and later entry into parenthood.
+The completed-fertility models produced more mixed evidence for financial knowledge. The financial-literacy score was not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $z = -1.32$, $p = .185$, 95\% CI [-0.026, 0.005]). In contrast, adolescent birth-control education was negatively associated with completed fertility ($b = -0.038$, $SE = 0.017$, $z = -2.22$, $p = .026$, 95\% CI [-0.071, -0.004]). The Cox proportional hazards model for timing of first birth also indicated a lower hazard of first birth among respondents exposed to birth-control education ($HR = 0.930$, log-HR $SE = 0.024$, $z = -2.96$, $p = .003$, 95\% CI [0.887, 0.976]). Because the global proportional-hazards diagnostic was statistically significant ($p < .001$), this timing estimate should be read cautiously as supportive evidence of later entry into parenthood rather than as definitive evidence of a constant hazard ratio across time. Taken together, the estimates are consistent with an association between reproductive education, lower completed fertility, and later entry into parenthood.
 
 \begin{table}[!htbp]
 \centering
 \caption{Main Model Results for Financial Preparedness, Reproductive Education, and Family Formation}
 \label{tab:main_results}
+\small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{p{0.18\textwidth}p{0.19\textwidth}p{0.17\textwidth}p{0.10\textwidth}p{0.10\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.07\textwidth}p{0.14\textwidth}}
+\begin{tabularx}{\textwidth}{Y Y p{0.15\textwidth} p{0.13\textwidth} p{0.13\textwidth} p{0.16\textwidth}}
 \toprule
-\textbf{Outcome} & \textbf{Predictor} & \textbf{Model} & \textbf{Metric} & \textbf{Estimate} & \textbf{SE} & \textbf{Statistic} & \textbf{$p$} & \textbf{95\% CI} \\
+\textbf{Outcome} & \textbf{Predictor} & \textbf{Model} & \textbf{Estimate (SE)} & \textbf{Test} & \textbf{95\% CI} \\
 \midrule
-Marital stability & Emergency savings & Respondent FE LPM & Coefficient & 0.029 & 0.009 & $t = 3.23$ & .001 & [0.011, 0.046] \\
-Completed fertility & Financial-literacy score & Poisson & Coefficient & -0.010 & 0.008 & $z = -1.32$ & .185 & [-0.026, 0.005] \\
-Completed fertility & Birth-control education & Poisson & Coefficient & -0.038 & 0.017 & $z = -2.22$ & .026 & [-0.071, -0.004] \\
-Timing of first birth & Birth-control education & Cox PH & HR & 0.930 & 0.024 & $z = -2.96$ & .003 & [0.887, 0.976] \\
+Marital stability & Emergency savings & Respondent FE LPM & 0.029 (0.009) & $t = 3.23$, $p = .001$ & [0.011, 0.046] \\
+Completed fertility & Financial-literacy score & Poisson & -0.010 (0.008) & $z = -1.32$, $p = .185$ & [-0.026, 0.005] \\
+Completed fertility & Birth-control education & Poisson & -0.038 (0.017) & $z = -2.22$, $p = .026$ & [-0.071, -0.004] \\
+Timing of first birth & Birth-control education & Cox PH & 0.930 (0.024) & $z = -2.96$, $p = .003$ & [0.887, 0.976] \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{adjustbox}
 \begin{minipage}{0.95\textwidth}
-\footnotesize \textit{Notes:} FE = fixed effects. LPM = linear probability model. HR = hazard ratio. Poisson estimates are log-count coefficients. For the Cox PH row, the estimate is reported as a hazard ratio and the standard error is for the log-hazard coefficient. Standard errors are robust where available and clustered at the respondent level in panel specifications. All estimates are interpreted as associations rather than causal effects. The financial-literacy coefficient is not statistically different from zero in the primary Poisson model.
+\footnotesize \textit{Notes:} FE = fixed effects. LPM = linear probability model. Poisson estimates are log-count coefficients. The Cox PH estimate is reported as a hazard ratio; its standard error is for the log-hazard coefficient. Standard errors are robust where available and clustered at the respondent level in panel specifications. The global proportional-hazards diagnostic for the Cox timing model was statistically significant ($p < .001$), so the timing estimate should be interpreted cautiously. All estimates are interpreted as associations rather than causal effects. The financial-literacy coefficient is not statistically different from zero in the primary Poisson model.
 \end{minipage}
 \end{table}
 
@@ -281,7 +286,7 @@ Timing of first birth & Birth-control education & Cox PH & HR & 0.930 & 0.024 & 
 
 Sensitivity checks support the main interpretation while also clarifying the limits of the evidence. The negative binomial model for completed fertility was estimated to evaluate whether the fertility associations were sensitive to overdispersion in the count outcome. The direction of the birth-control education association remained negative, while the financial-literacy association remained substantively small. This pattern indicates that the main fertility conclusions are not driven solely by the Poisson distributional assumption.
 
-The Cox proportional hazards model provides a timing-based check for the birth-control education result. The hazard ratio below one indicates that respondents exposed to adolescent birth-control education had a lower observed hazard of first birth at a given time. This finding is consistent with later entry into parenthood and complements the completed-fertility result. The timing and completed-fertility models therefore point in the same broad direction for reproductive education, although neither model establishes causality.
+The Cox proportional hazards model provides a timing-based check for the birth-control education result. The model included 10,777 respondents and 7,747 observed first-birth events. The hazard ratio below one indicates that respondents exposed to adolescent birth-control education had a lower observed hazard of first birth at a given time; however, the global proportional-hazards diagnostic was statistically significant ($p < .001$), suggesting possible violation of the proportional-hazards assumption. The timing result therefore complements the completed-fertility result but is treated as supportive evidence rather than independently dispositive evidence of a stable hazard-ratio relationship across the observation period.
 
 Diagnostic review also reinforces the need for cautious interpretation. Emergency savings are measured only in later waves, so the fixed-effects model estimates within-person associations over the observed adult period rather than over the full life course. Financial-literacy items are also available only in selected later waves, limiting the ability to distinguish long-standing financial knowledge from knowledge accumulated after family formation. Birth-control education is measured retrospectively and does not capture curriculum quality, contraceptive access, or actual contraceptive behavior. These measurement constraints support interpreting the results as structured associations rather than causal estimates.
 
@@ -291,17 +296,19 @@ Table~\ref{tab:robustness} summarizes model diagnostics and sensitivity checks r
 \centering
 \caption{Sensitivity and Diagnostic Summary}
 \label{tab:robustness}
+\small
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{p{0.30\textwidth}p{0.28\textwidth}p{0.42\textwidth}}
+\begin{tabularx}{\textwidth}{Y p{0.28\textwidth} Y}
 \toprule
 \textbf{Check} & \textbf{Purpose} & \textbf{Interpretation} \\
 \midrule
 Negative binomial count model & Assess sensitivity to overdispersion in completed fertility & Birth-control education remains negatively associated with completed fertility; financial literacy remains substantively small. \\
-Cox proportional hazards model & Assess timing of first birth & Birth-control education is associated with a lower hazard of first birth, consistent with later entry into parenthood. \\
+Cox proportional hazards model & Assess timing of first birth & Birth-control education is associated with a lower hazard of first birth, but a significant global diagnostic test suggests the timing estimate should be interpreted cautiously. \\
+Cox first-birth events & Document event count in the timing model & The Cox estimation sample includes 7,747 observed first-birth events among 10,777 respondents. \\
 Respondent fixed effects & Adjust for time-invariant respondent characteristics & Emergency savings are positively associated with marital stability within respondents over time. \\
 Model-specific samples & Preserve available observations across uneven measurement waves & Sample sizes differ by model because emergency savings, financial literacy, fertility, and birth-control education are not observed in every wave. \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{adjustbox}
 \begin{minipage}{0.95\textwidth}
 \footnotesize
@@ -323,7 +330,7 @@ This study examined associations between financial preparedness, reproductive ed
 
 The fertility results point to a more differentiated pattern. Financial literacy was not statistically associated with completed fertility in the primary Poisson model. This finding weakens a simple interpretation that financial knowledge alone is linked to higher completed fertility in this cohort. It may be that broad financial-literacy items measured later in life do not capture the specific planning capacities relevant to earlier fertility decisions. It may also be that financial literacy operates through income, education, employment, partnership stability, or household wealth rather than through a direct association with the number of children ever born.
 
-Adolescent birth-control education was negatively associated with completed fertility and was also associated with later entry into parenthood in the Cox proportional hazards model. This pattern is consistent with a life-course interpretation in which reproductive knowledge is linked to greater control over pregnancy timing, delayed first birth, and smaller completed family size. The finding aligns with prior research showing that contraception and reproductive control can alter schooling, work, marriage, and fertility trajectories \citep{goldin2002,bailey2010,kearney2009,lindberg2016,myers2017}. At the same time, the measure used here captures reported exposure to birth-control education, not curriculum quality, contraceptive access, or contraceptive behavior.
+Adolescent birth-control education was negatively associated with completed fertility and was also associated with later entry into parenthood in the Cox proportional hazards model. This pattern is consistent with a life-course interpretation in which reproductive knowledge is linked to greater control over pregnancy timing, delayed first birth, and smaller completed family size. The timing result should be interpreted cautiously because diagnostic evidence suggested possible violation of the proportional-hazards assumption, but its direction is consistent with the completed-fertility model. The finding aligns with prior research showing that contraception and reproductive control can alter schooling, work, marriage, and fertility trajectories \citep{goldin2002,bailey2010,kearney2009,lindberg2016,myers2017}. At the same time, the measure used here captures reported exposure to birth-control education, not curriculum quality, contraceptive access, or contraceptive behavior.
 
 The results contribute to family economics by showing that financial preparedness and reproductive education appear to map onto different family-formation outcomes. Emergency savings are more clearly linked to household continuity, while birth-control education is more clearly linked to fertility timing and completed fertility. Financial literacy, at least as measured in the available later-life survey items, does not show a statistically detectable association with completed fertility in the primary model. Taken together, the findings suggest that economic resilience and reproductive knowledge should be treated as distinct but related components of family-formation processes.
 
@@ -345,6 +352,8 @@ Measurement timing also constrains inference. Emergency savings and financial-li
 
 The birth-control education measure is also limited. It captures reported exposure to adolescent instruction about contraception or reproductive health, but it does not measure curriculum quality, instructional intensity, contraceptive access, family norms, religious context, school policy, or actual contraceptive behavior. Because exposure may be correlated with school environment, family background, community norms, and local policy, the association between birth-control education and fertility timing should not be interpreted as a clean causal estimate.
 
+The timing model adds another constraint. The global proportional-hazards diagnostic was statistically significant, indicating possible violation of the Cox model's proportional-hazards assumption. The estimated hazard ratio for birth-control education is therefore best treated as supportive evidence that points in the same direction as the completed-fertility result, not as a definitive time-constant hazard relationship.
+
 The model-specific sample design preserves available information but creates differences in analytic samples across outcomes. Emergency savings, financial literacy, marital status, fertility histories, and birth-control education are not observed uniformly across all respondents and waves. As a result, estimates from one model should not be read as if they came from the same balanced sample as estimates from another model.
 
 Public-use data restrictions impose additional constraints. The analysis does not use restricted geographic identifiers, school-level context, local policy measures, or administrative records. These limitations reduce the ability to examine place-based variation in reproductive education, local labor markets, housing conditions, or institutional access. The results are therefore best interpreted as national cohort-level associations using public-use longitudinal data.
@@ -359,7 +368,7 @@ Public-use data restrictions impose additional constraints. The analysis does no
 
 \section{Conclusion}
 
-This study examined whether financial preparedness and adolescent reproductive education are associated with marital stability, completed fertility, and timing of first birth in the NLSY79. The results show that emergency savings are positively associated with marital stability within respondents over time. Financial literacy is not statistically associated with completed fertility in the primary Poisson model. Adolescent exposure to birth-control education is associated with lower completed fertility and later entry into parenthood.
+This study examined whether financial preparedness and adolescent reproductive education are associated with marital stability, completed fertility, and timing of first birth in the NLSY79. The results show that emergency savings are positively associated with marital stability within respondents over time. Financial literacy is not statistically associated with completed fertility in the primary Poisson model. Adolescent exposure to birth-control education is associated with lower completed fertility and, with proportional-hazards caveats, later entry into parenthood.
 
 These findings suggest that financial liquidity and reproductive education correspond to different parts of the family-formation process. Emergency savings appear most relevant to household continuity, while reproductive education appears more closely linked to fertility timing and completed family size. The absence of a statistically significant financial-literacy association cautions against treating general financial knowledge as a direct predictor of completed fertility, particularly when measured later in adulthood.
 
