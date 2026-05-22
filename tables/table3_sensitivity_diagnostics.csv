@@ -3,4 +3,4 @@
 "Negative binomial theta","40.264","Larger theta indicates less overdispersion in the negative binomial parameterization."
 "Birth-control education IRR in negative binomial model","0.963","Robustness estimate for the birth-control education association with completed fertility."
 "Cox first-birth events","7747","Number of observed first-birth events in the Cox estimation sample; this is not the same as the respondent-level analytic sample size."
-"Cox proportional hazards global test","<.001","Non-significant global test supports the proportional-hazards assumption."
+"Cox proportional hazards global test","<.001","Significant global test suggests possible proportional-hazards assumption violation; Cox timing estimates should be interpreted cautiously."
