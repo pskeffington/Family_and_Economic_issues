@@ -7,7 +7,8 @@ Target journal: *Journal of Family and Economic Issues*
 - `NLS-79.pdf` — blinded manuscript PDF generated from GitHub Actions artifact `NLS-79-compiled-pdf`.
 - `manuscript/NLS-79.tex` — editable blinded LaTeX manuscript source, if the portal requests source files.
 - `manuscript/references.bib` — manuscript bibliography, if the portal requests source files.
-- `submission/title_page.tex` — unblinded title page with author, affiliations, email, ORCID, and declarations.
+- `submission/NLS-79_title_declarations.tex` — unblinded title page and declarations file.
+- `submission/title_page.tex` — title-page-only source file, if the portal requests title-page material separately from declarations.
 - `submission/cover_letter.md` — cover letter text for the submission portal.
 - `submission/author_disclosures.md` — disclosure statements for portal fields.
 - `REPRODUCIBILITY.md` — optional reproducibility note if requested.
