@@ -15,7 +15,7 @@ This roadmap defines the work needed before the repository should be treated as 
 
 - [x] Confirm `manuscript/NLS-79.tex` compiles locally and under the automated workflow configuration.
 - [x] Resolve missing package, bibliography, path, and table errors found during repository cleanup.
-- [ ] Confirm generated PDF artifact appears under GitHub Actions after the next push.
+- [x] Confirm generated PDF artifact appears under GitHub Actions after the next push.
 - [x] Confirm no LaTeX auxiliary files are present in the live repository tree.
 
 ## Phase 2 — Citation verification
@@ -35,15 +35,15 @@ This roadmap defines the work needed before the repository should be treated as 
 
 ## Phase 4 — Manuscript review
 
-- [ ] Confirm model estimates in text match table output.
-- [ ] Remove unsupported causal language.
-- [ ] Tighten limitations section.
-- [ ] Align manuscript language with *Journal of Family and Economic Issues* expectations.
-- [ ] Confirm declarations, data availability, funding, and competing-interest statements.
+- [x] Confirm model estimates in text match table output.
+- [x] Remove unsupported causal language.
+- [x] Tighten limitations section.
+- [x] Align manuscript language with *Journal of Family and Economic Issues* expectations.
+- [x] Confirm declarations, data availability, funding, and competing-interest statements.
 
 ## Phase 5 — Submission package
 
-- [ ] Produce clean blinded manuscript PDF.
+- [x] Produce clean blinded manuscript PDF.
 - [x] Prepare source `.tex` and `.bib` materials.
 - [ ] Produce upload archive only if required by the journal portal.
 - [x] Prepare cover letter.
