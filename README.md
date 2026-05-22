@@ -1,12 +1,16 @@
 # Family and Economic Issues
 
+**Status:** Pre-release / contributor review.
+
 LaTeX manuscript repository for research on family formation, financial preparedness, reproductive education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
 
 ## Current manuscript
 
 **Working title:** *Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79*
 
-This repository is structured for a reproducible manuscript workflow:
+This repository is currently in pre-release form. The manuscript source is being organized for reproducible drafting, contributor review, citation verification, model-output cleanup, and automated LaTeX compilation. The work should not yet be treated as a final submission package.
+
+## Repository structure
 
 ```text
 manuscript/
@@ -20,6 +24,9 @@ tables/
 
 figures/
   figure files as needed
+
+analysis/
+  R or Python scripts used to regenerate tables
 
 .github/workflows/
   build-latex.yml
@@ -48,6 +55,10 @@ Model tables should be generated from R as standalone `.tex` fragments and saved
 ```latex
 \input{../tables/table1_descriptive_statistics.tex}
 ```
+
+## Contributor priorities
+
+Current pre-release priorities are citation verification, LaTeX compilation stability, table reproducibility, model-output alignment, journal-format cleanup, and transparent documentation of analytic limitations.
 
 ## Notes
 
