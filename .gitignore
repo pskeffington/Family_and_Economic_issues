@@ -24,6 +24,26 @@
 # Generated output
 output/
 
+# Local NLSY79 public-use extracts and raw data loaders
+NLS79 DATA/
+NLS79_DATA/
+data/
+Data/
+*.dat
+*.sdf
+*.sas
+*.sps
+*.dct
+*.cdb
+*.NLSY79
+*value-labels.do
+Capstone_data2.csv
+default324.csv
+NLS79-FERTILITY.csv
+NLS79_Data_Raw.csv
+nls79_emergency_fe_result.csv
+extract.log
+
 # R/session artifacts
 .Rhistory
 .RData
