@@ -1,12 +1,12 @@
 # Family and Economic Issues
 
-**Status:** Pre-submission cleanup / contributor review.
+**Status:** JFEI pre-submission cleanup / blinded-package review.
 
-LaTeX manuscript repository for research on family formation, financial preparedness, reproductive education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
+LaTeX manuscript repository for research on family formation, financial preparedness, birth-control education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
 
 ## Current manuscript
 
-**Working title:** *Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79*
+**Working title:** *Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79*
 
 This repository is in pre-submission form. It is organized for reproducible drafting, contributor review, citation verification, model-output audit, and automated LaTeX compilation. The manuscript should not be treated as a final journal submission package until the release checklist below is complete.
 
@@ -27,7 +27,8 @@ figures/
   figure files as needed
 
 submission/
-  title-page and cover-letter materials; not part of blinded manuscript
+  NLS-79_title_declarations.tex # separate title page and declarations; not part of blinded manuscript
+  cover-letter and other submission materials as needed
 
 .github/workflows/
   build-latex.yml
@@ -115,7 +116,7 @@ The manuscript file under `manuscript/` is intended to remain blinded for peer r
 Recommended submission-support files:
 
 ```text
-submission/title_page.tex
+submission/NLS-79_title_declarations.tex
 submission/cover_letter.md
 submission/author_disclosures.md
 ```
