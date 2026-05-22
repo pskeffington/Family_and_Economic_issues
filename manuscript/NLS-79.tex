@@ -1,5 +1,5 @@
 % ============================================================
-% MAIN BLINDED MANUSCRIPT 
+% MAIN BLINDED MANUSCRIPT
 % ============================================================
 
 \documentclass[12pt]{article}
@@ -13,54 +13,13 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{adjustbox}
-\usepackage{booktabs}
-\usepackage{threeparttable}
-\usepackage{adjustbox}
 \usepackage{array}
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-
-% ************************************************************
-% CLEAN BOXED TABLE MACROS -- NO TABULAR ENVIRONMENTS
-% ************************************************************
-
-\providecommand{\boxtablerule}{}
-\renewcommand{\boxtablerule}{\par\noindent\rule{\linewidth}{0.4pt}\par}
-
-\providecommand{\boxrowfourclean}[4]{}
-\renewcommand{\boxrowfourclean}[4]{%
-\noindent
-\parbox[t]{0.23\linewidth}{\raggedright #1}%
-\hspace{0.025\linewidth}%
-\parbox[t]{0.16\linewidth}{\raggedright #2}%
-\hspace{0.025\linewidth}%
-\parbox[t]{0.20\linewidth}{\raggedright #3}%
-\hspace{0.025\linewidth}%
-\parbox[t]{0.29\linewidth}{\raggedright #4}%
-\par\medskip
-}
-
-\providecommand{\boxrowsixclean}[6]{}
-\renewcommand{\boxrowsixclean}[6]{%
-\noindent
-\parbox[t]{0.16\linewidth}{\raggedright #1}%
-\hspace{0.018\linewidth}%
-\parbox[t]{0.18\linewidth}{\raggedright #2}%
-\hspace{0.018\linewidth}%
-\parbox[t]{0.12\linewidth}{\raggedright #3}%
-\hspace{0.018\linewidth}%
-\parbox[t]{0.10\linewidth}{\raggedright #4}%
-\hspace{0.018\linewidth}%
-\parbox[t]{0.15\linewidth}{\raggedright #5}%
-\hspace{0.018\linewidth}%
-\parbox[t]{0.16\linewidth}{\raggedright #6}%
-\par\medskip
-}
-
+\usepackage{tabularx}
 
 \doublespacing
 
 \begin{document}
-\title{Financial Preparedness, Birth-Control Education, and Family Formation: Evidence from the NLSY79}
+\title{Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79}
 \date{}
 \maketitle
 \pagebreak
@@ -70,7 +29,7 @@
 % ************************************************************
 
 \begin{abstract}
-Fertility decline, delayed family formation, and household financial insecurity have renewed interest in how economic preparedness and reproductive knowledge shape long-run family outcomes. This study examines associations between financial preparedness, adolescent birth-control education, marital stability, completed fertility, and timing of first birth among respondents in the National Longitudinal Survey of Youth 1979 cohort. The analysis draws on repeated measures of marital status, emergency savings, financial literacy, fertility histories, and adolescent reproductive-education exposure. Fixed-effects panel models estimate within-person associations between emergency savings and marital stability. Poisson and negative binomial count models estimate associations with completed fertility, and Cox proportional hazards models estimate timing of first birth. Results show that emergency savings are positively associated with marital stability in fixed-effects models ($b = 0.664$, $SE = 0.027$, 95\% CI [0.611, 0.717]). Financial literacy is positively associated with completed fertility (IRR = 1.042), while adolescent birth-control education is associated with lower completed fertility (IRR = 0.922) and delayed entry into parenthood (HR = 0.91). These findings suggest that financial preparedness and reproductive education operate through distinct life-course pathways: financial resilience is associated with household continuity and greater completed fertility, while birth-control education is associated with delayed first birth and smaller completed family size. The study contributes to family economics by integrating household financial preparedness, reproductive education, marital stability, and fertility outcomes within a single longitudinal framework. All estimates are interpreted as associations rather than causal effects.
+Fertility decline, delayed family formation, and household financial insecurity have renewed interest in the economic conditions that shape long-run family outcomes. This study examines whether financial preparedness and adolescent reproductive education are associated with marital stability, completed fertility, and timing of first birth among respondents in the National Longitudinal Survey of Youth 1979 cohort. The analysis draws on repeated measures of marital status, emergency savings, financial literacy, fertility, and birth-control education. Fixed-effects panel models are used to estimate within-person associations between emergency savings and marital stability. Poisson and negative binomial count models are used to examine completed fertility, and Cox proportional hazards models are used to assess timing of first birth. Results indicate that emergency savings are positively associated with marital stability ($b = 0.029$, $SE = 0.009$, $p = .001$). Financial literacy is not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $p = .185$). Adolescent exposure to birth-control education is associated with lower completed fertility ($b = -0.038$, $SE = 0.017$, $p = .026$) and later entry into parenthood ($HR = 0.930$, $SE = 0.024$, $p = .003$). These findings suggest that financial liquidity and reproductive education operate through distinct life-course pathways: emergency savings are linked to household continuity, while reproductive education is linked to fertility timing and family size. The study contributes to family economics by integrating financial preparedness, reproductive education, and fertility outcomes within a single longitudinal framework, while emphasizing that the results are associational rather than causal.
 \end{abstract}
 
 % ************************************************************
@@ -99,7 +58,7 @@ This study addresses that gap using the National Longitudinal Survey of Youth 19
 
 The analysis evaluates three related outcomes: marital stability, completed fertility, and timing of first birth. Fixed-effects panel models estimate within-person associations between emergency savings and marital stability. Poisson and negative binomial count models examine completed fertility. Cox proportional hazards models assess timing of first birth. The empirical objective is not to claim definitive causal identification, but to estimate structured longitudinal associations that clarify how financial preparedness and reproductive education correspond to family formation across the life course.
 
-This study makes three contributions. First, it integrates financial preparedness and reproductive education within a single family-economics framework. Second, it links short-term household liquidity, financial knowledge, and adolescent birth-control education to long-run outcomes in marriage and fertility. Third, it uses longitudinal NLSY79 data to examine whether these associations persist across adulthood rather than only during early reproductive years. Taken together, the study advances a broader account of family formation in which economic resilience and reproductive knowledge shape distinct but connected pathways into marriage, parenthood, and completed fertility.
+This study integrates financial preparedness and reproductive education within a single family-economics framework, links short-term household liquidity, financial knowledge, and adolescent birth-control education to long-run outcomes in marriage and fertility, and uses longitudinal NLSY79 data to examine whether these associations persist across adulthood rather than only during early reproductive years. Taken together, the study advances a broader account of family formation in which economic resilience and reproductive knowledge shape distinct but connected pathways into marriage, parenthood, and completed fertility.
 
 % ************************************************************
 % END INTRODUCTION
@@ -158,66 +117,34 @@ The expected associations are distinct. Emergency savings are expected to be pos
 % ************************************************************
 % SECTION BREAK
 % ************************************************************
-% DATA
+% DATA AND METHODS
 % ************************************************************
 
-\section{Data}
+\section{Data and Methods}
 
-\subsection{Data Source}
+\subsection{Data Source and Analytic Samples}
 
-This study uses public-use data from the National Longitudinal Survey of Youth 1979 (NLSY79), a nationally representative longitudinal cohort administered by the U.S. Bureau of Labor Statistics. The original NLSY79 cohort includes 12,686 respondents born between 1957 and 1964 who were living in the United States at the time of the initial 1979 survey \citep{bls2025nlsy79,nlsinfo2026nlsy79}. The cohort is well suited for the present analysis because it follows respondents from adolescence and young adulthood into midlife and later adulthood while repeatedly measuring family formation, fertility, education, household composition, marital status, and selected financial-preparedness measures.
+This study uses public-use data from the National Longitudinal Survey of Youth 1979 (NLSY79), a nationally representative longitudinal cohort administered by the U.S. Bureau of Labor Statistics. The original cohort includes 12,686 respondents born between 1957 and 1964 who were living in the United States at the time of the initial 1979 survey \citep{bls2025nlsy79,nlsinfo2026nlsy79}. The cohort is well suited for this analysis because it follows respondents from adolescence and young adulthood into midlife and later adulthood while repeatedly measuring family formation, fertility, education, household composition, marital status, financial-preparedness measures, and adolescent reproductive-education exposure.
 
-The analytic file was constructed from selected public-use NLSY79 variables measuring respondent identifier, sex, race and ethnicity, educational attainment, marital status, fertility histories, number of children ever born, children in the household, emergency savings, financial-literacy items, and adolescent birth-control education exposure. Marital status is observed repeatedly from the early survey waves through 2022. Fertility is measured using repeated wave-specific counts of children ever born and cross-round fertility-history variables, including child date-of-birth records. Financial-preparedness measures are drawn from later survey waves in which respondents were asked about emergency funds and financial knowledge. Birth-control education exposure is drawn from adolescent sex-education items, including whether respondents reported instruction related to contraception and birth-control methods.
+The analytic file was constructed from selected public-use variables measuring respondent identifier, sex, race and ethnicity, educational attainment, marital status, fertility histories, number of children ever born, children in the household, emergency savings, financial-literacy items, and adolescent birth-control education exposure. Marital status is observed repeatedly from the early survey waves through 2022. Fertility is measured using repeated wave-specific counts of children ever born and cross-round fertility-history variables, including child date-of-birth records. Financial-preparedness measures are drawn from later survey waves in which respondents were asked about emergency funds and financial knowledge. Birth-control education exposure is drawn from adolescent sex-education items, including whether respondents reported instruction related to contraception and birth-control methods.
 
-\subsection{Analytic Samples}
+Because the core variables were not collected in every survey wave, the analysis uses model-specific analytic samples rather than a single balanced panel. This approach preserves the longitudinal strengths of the NLSY79 while avoiding unnecessary loss of respondents who are missing variables not required for a given model. The marital-stability analysis uses respondent-wave observations in which marital status and emergency savings are jointly observed. The completed-fertility analyses use respondent-level fertility outcomes linked to financial-literacy and birth-control education measures. The timing-of-first-birth analysis uses fertility-history records to identify entry into parenthood, with respondents who had not experienced a first birth treated as censored in the event-history framework. Descriptive statistics and model-specific sample sizes are reported in the Results section.
 
-Because the core variables were not collected in every survey wave, the analysis uses model-specific analytic samples rather than a single balanced panel. This approach preserves the longitudinal strengths of the NLSY79 while avoiding unnecessary loss of respondents who are missing variables not required for a given model.
+\subsection{Measures}
 
-The marital-stability analysis uses respondent-wave observations in which marital status and emergency savings are jointly observed. The completed-fertility analyses use respondent-level fertility outcomes linked to financial-literacy and birth-control education measures. The timing-of-first-birth analysis uses fertility-history records to identify entry into parenthood, with respondents who had not experienced a first birth treated as censored in the event-history framework. Descriptive statistics and model-specific sample sizes are reported in the Results section.
+The primary family-formation outcomes are marital stability, completed fertility, and timing of first birth. Marital stability is operationalized from repeated marital-status variables and coded to distinguish respondents observed as married from those observed in other marital states. This measure is used in the respondent fixed-effects panel analysis of emergency savings and marital status. Completed fertility is measured as the respondent's number of children ever born by the latest available fertility observation. The count outcome is used in the Poisson and negative binomial fertility models. Timing of first birth is derived from the first recorded child date-of-birth information and used to construct the event-time measure for the Cox proportional hazards model.
 
-\subsection{Outcome Measures}
-
-The primary family-formation outcomes are marital stability, completed fertility, and timing of first birth. Marital stability is operationalized from repeated marital-status variables and coded to distinguish respondents observed as married from those observed in other marital states. This measure is used in the respondent fixed-effects panel analysis of emergency savings and marital status.
-
-Completed fertility is measured as the respondent's number of children ever born by the latest available fertility observation. The count outcome is used in the Poisson and negative binomial fertility models. Timing of first birth is derived from the first recorded child date-of-birth information and used to construct the event-time measure for the Cox proportional hazards model.
-
-\subsection{Primary Explanatory Measures}
-
-The primary explanatory measures are emergency savings, financial literacy, and birth-control education. Emergency savings is measured as an indicator for whether the respondent reported having funds sufficient to cover several months of expenses. This measure captures liquid financial preparedness rather than total household wealth.
-
-Financial literacy is constructed from available survey items measuring financial knowledge and self-assessed financial-management capacity in waves where those items are available. These items include knowledge of interest, inflation, risk diversification, bond-price changes, mortgage terms, and self-assessed financial-management ability. The resulting index is interpreted as a measure of financial knowledge and planning capacity, not as a complete measure of socioeconomic advantage.
-
-Birth-control education is coded from adolescent reproductive-education items indicating exposure to instruction about contraception, birth-control methods, where to obtain contraception, and related reproductive-health content. The measure captures reported exposure to birth-control education, but it does not capture curriculum quality, instructional intensity, local policy context, religious or family attitudes, or actual contraceptive behavior.
-
-\subsection{Control Variables}
+The primary explanatory measures are emergency savings, financial literacy, and birth-control education. Emergency savings is measured as an indicator for whether the respondent reported having funds sufficient to cover several months of expenses. This measure captures liquid financial preparedness rather than total household wealth. Financial literacy is constructed from available survey items measuring financial knowledge and self-assessed financial-management capacity in waves where those items are available. These items include knowledge of interest, inflation, risk diversification, bond-price changes, mortgage terms, and self-assessed financial-management ability. The resulting index is interpreted as a measure of financial knowledge and planning capacity, not as a complete measure of socioeconomic advantage. Birth-control education is coded from adolescent reproductive-education items indicating exposure to instruction about contraception, birth-control methods, where to obtain contraception, and related reproductive-health content. The measure captures reported exposure to birth-control education, but it does not capture curriculum quality, instructional intensity, local policy context, religious or family attitudes, or actual contraceptive behavior.
 
 Control variables include respondent sex, race and ethnicity, and educational attainment. Sex and race and ethnicity are treated as baseline demographic characteristics. Education is measured using highest-grade-completed variables and harmonized across waves where repeated education measures are available. Survey-year indicators are used in panel specifications to adjust for period-specific conditions affecting all respondents in a given wave.
 
-\subsection{Missing Data and Public-Use Restrictions}
-
-NLSY79 missing-value codes were recoded before analysis. Responses coded as refusal, ``don't know,'' invalid missing, valid missing, or non-interview were treated as missing rather than substantive values. Analytic samples were then defined separately for each model according to the nonmissing outcome, predictor, and control information required for that specification. Dependent variables were not imputed.
-
-All analyses use de-identified public-use data. No restricted geographic identifiers, confidential respondent identifiers, or protected respondent-level records were used. The findings should therefore be interpreted as estimates from public-use longitudinal survey data rather than from restricted administrative or geocoded records.
-
-% ************************************************************
-% END DATA
-% ************************************************************
-% SECTION BREAK
-% ************************************************************
-% METHODS
-% ************************************************************
-
-\section{Methods}
+NLSY79 missing-value codes were recoded before analysis. Responses coded as refusal, ``don't know,'' invalid missing, valid missing, or non-interview were treated as missing rather than substantive values. Analytic samples were then defined separately for each model according to the nonmissing outcome, predictor, and control information required for that specification. Dependent variables were not imputed. All analyses use de-identified public-use data. No restricted geographic identifiers, confidential respondent identifiers, or protected respondent-level records were used.
 
 \subsection{Analytic Strategy}
 
 The analysis estimates associations between financial preparedness, birth-control education, and three family-formation outcomes: marital stability, completed fertility, and timing of first birth. The empirical design uses model-specific samples because marital status, emergency savings, financial-literacy items, fertility histories, and birth-control education were measured in different survey waves. Each model is estimated on the largest available analytic sample with nonmissing values for the outcome, focal predictor, and required covariates.
 
-The analysis proceeds in three stages. First, respondent fixed-effects panel models estimate the association between emergency savings and marital stability using repeated marital-status observations. Second, count models estimate associations between financial literacy, birth-control education, and completed fertility. Third, event-history models estimate whether birth-control education is associated with timing of first birth. These specifications are interpreted as associational models rather than causal estimates.
-
-\subsection{Marital-Stability Model}
-
-Marital stability is modeled using repeated respondent-wave observations. The dependent variable is an indicator for whether respondent \(i\) is observed as married in survey wave \(t\). The focal predictor is emergency savings, measured as whether the respondent reported having funds sufficient to cover several months of expenses. Respondent fixed effects adjust for all time-invariant individual characteristics, including baseline sex, race and ethnicity, early family background, and stable unobserved traits. Survey-year indicators adjust for period-specific conditions shared across respondents.
+Respondent fixed-effects panel models estimate the association between emergency savings and marital stability using repeated marital-status observations. Count models estimate associations between financial literacy, birth-control education, and completed fertility. Event-history models estimate whether birth-control education is associated with timing of first birth. These specifications are interpreted as associational models rather than causal estimates.
 
 \[
 \textbf{Equation 1: Fixed-effects marital-stability model}
@@ -227,62 +154,29 @@ Marital stability is modeled using repeated respondent-wave observations. The de
 Married_{it} = \beta_{1}EmergencySavings_{it} + \boldsymbol{\gamma}X_{it} + \alpha_i + \lambda_t + \varepsilon_{it}
 \end{equation}
 
-\noindent where:
-
-\begin{itemize}
-    \item \(Married_{it}\) is an indicator equal to 1 if respondent \(i\) is married in wave \(t\), and 0 otherwise.
-    \item \(EmergencySavings_{it}\) is an indicator equal to 1 if respondent \(i\) reports having emergency savings in wave \(t\), and 0 otherwise.
-    \item \(X_{it}\) is a vector of time-varying controls, including educational attainment where available.
-    \item \(\alpha_i\) represents respondent fixed effects.
-    \item \(\lambda_t\) represents survey-year fixed effects.
-    \item \(\varepsilon_{it}\) is the idiosyncratic error term.
-\end{itemize}
-
-The coefficient of interest is \(\beta_{1}\). A positive value of \(\beta_{1}\) indicates that, within respondents over time, emergency savings are associated with a higher probability of being observed as married. Standard errors are clustered at the respondent level to account for repeated observations within individuals.
-
-\subsection{Completed-Fertility Models}
-
-Completed fertility is measured as the respondent's number of children ever born by the latest available fertility observation. Because completed fertility is a nonnegative count outcome, the analysis estimates Poisson and negative binomial models. The Poisson model provides the main count-model specification, while the negative binomial model is used to assess whether the results are robust to overdispersion in fertility counts.
+In Equation 1, \(Married_{it}\) is an indicator equal to 1 when respondent \(i\) is married in wave \(t\), \(EmergencySavings_{it}\) is an indicator equal to 1 when respondent \(i\) reports having emergency savings in wave \(t\), \(X_{it}\) represents time-varying controls including educational attainment where available, \(\alpha_i\) represents respondent fixed effects, \(\lambda_t\) represents survey-year fixed effects, and \(\varepsilon_{it}\) is the idiosyncratic error term. The coefficient of interest is \(\beta_{1}\). A positive value of \(\beta_{1}\) indicates that, within respondents over time, emergency savings are associated with a higher probability of being observed as married. Standard errors are clustered at the respondent level to account for repeated observations within individuals.
 
 \[
 \textbf{Equation 2: Poisson completed-fertility model}
 \]
 
 \begin{equation}
-E(Children_i \mid Z_i) = \exp(\beta_{1}FinancialLiteracy_i + \beta_{2}BirthControlEducation_i + \boldsymbol{\delta}Z_i)
+\log\left(E[Children_i]\right) =
+\beta_{1}FinancialLiteracy_i + \beta_{2}BirthControlEducation_i + \boldsymbol{\delta}Z_i
 \end{equation}
 
-\noindent where:
-
-\begin{itemize}
-    \item \(Children_i\) is the completed number of children ever born to respondent \(i\).
-    \item \(FinancialLiteracy_i\) is the respondent's financial-literacy measure.
-    \item \(BirthControlEducation_i\) is an indicator for adolescent exposure to birth-control education.
-    \item \(Z_i\) is a vector of respondent-level controls, including sex, race and ethnicity, and educational attainment.
-\end{itemize}
-
-The exponentiated coefficients are interpreted as incidence rate ratios (IRRs). An IRR greater than 1 indicates a positive association with completed fertility, while an IRR less than 1 indicates a negative association with completed fertility.
+In Equation 2, \(Children_i\) is the completed number of children ever born to respondent \(i\), \(FinancialLiteracy_i\) is the respondent's financial-literacy measure, \(BirthControlEducation_i\) is an indicator for adolescent exposure to birth-control education, and \(Z_i\) is a vector of respondent-level controls including sex, race and ethnicity, and educational attainment. Poisson coefficients are reported as log-count estimates. For substantive interpretation, coefficients are exponentiated and reported as incidence rate ratios. An incidence rate ratio greater than one indicates higher expected completed fertility, while an incidence rate ratio below one indicates lower expected completed fertility.
 
 \[
 \textbf{Equation 3: Negative binomial completed-fertility model}
 \]
 
 \begin{equation}
-E(Children_i \mid Z_i, u_i) = \exp(\beta_{1}FinancialLiteracy_i + \beta_{2}BirthControlEducation_i + \boldsymbol{\delta}Z_i + u_i)
+\log\left(E[Children_i \mid u_i]\right) =
+\beta_{1}FinancialLiteracy_i + \beta_{2}BirthControlEducation_i + \boldsymbol{\delta}Z_i + u_i
 \end{equation}
 
-\noindent where:
-
-\begin{itemize}
-    \item \(u_i\) captures unobserved heterogeneity in the fertility count process.
-    \item The remaining terms are defined as in Equation 2.
-\end{itemize}
-
-The negative binomial model is used as a robustness specification because completed fertility may exhibit greater variance than expected under the Poisson distribution. Consistency in direction and magnitude across the Poisson and negative binomial models is interpreted as evidence that the completed-fertility associations are not driven solely by count-model distributional assumptions.
-
-\subsection{Timing-of-First-Birth Model}
-
-Timing of first birth is analyzed using an event-history framework. The event is the respondent's first recorded birth. Respondents who do not have a recorded birth by the latest available fertility observation are treated as censored. The focal predictor is adolescent birth-control education, which captures reported exposure to instruction about contraception or birth-control methods.
+In Equation 3, \(u_i\) captures unobserved heterogeneity in the fertility count process, while the remaining terms are defined as in Equation 2. The negative binomial model is used as a robustness specification because completed fertility may exhibit greater variance than expected under the Poisson distribution. Consistency in direction and magnitude across the Poisson and negative binomial models is interpreted as evidence that the completed-fertility associations are not driven solely by count-model distributional assumptions.
 
 \[
 \textbf{Equation 4: Cox proportional hazards model for first birth}
@@ -292,282 +186,130 @@ Timing of first birth is analyzed using an event-history framework. The event is
 h_i(t) = h_0(t)\exp(\beta_{1}BirthControlEducation_i + \boldsymbol{\theta}W_i)
 \end{equation}
 
-\noindent where:
-
-\begin{itemize}
-    \item \(h_i(t)\) is the hazard of first birth for respondent \(i\) at time \(t\).
-    \item \(h_0(t)\) is the unspecified baseline hazard.
-    \item \(BirthControlEducation_i\) is an indicator for adolescent exposure to birth-control education.
-    \item \(W_i\) is a vector of respondent-level controls, including sex, race and ethnicity, and educational attainment.
-\end{itemize}
-
-The exponentiated coefficient for birth-control education is interpreted as a hazard ratio (HR). An HR less than 1 indicates that birth-control education is associated with a lower hazard of first birth at a given time, consistent with delayed entry into parenthood.
-
-\subsection{Covariates}
-
-The covariate structure is intentionally parsimonious. Baseline demographic controls include sex and race and ethnicity. Educational attainment is included because schooling is closely linked to fertility timing, completed fertility, financial literacy, and marital behavior. In the fixed-effects marital-stability model, time-invariant respondent characteristics are absorbed by respondent fixed effects and are therefore not separately estimated.
-
-\subsection{Missing Data}
-
-Missing values were handled using model-specific complete-case analysis. NLSY79 special missing-value codes for refusal, ``don't know,'' invalid missing, valid missing, and non-interview were recoded as missing before analysis. Observations were excluded from a model only when they were missing information required for that specific model. Dependent variables were not imputed.
-
-\subsection{Interpretation of Estimates}
+In Equation 4, \(h_i(t)\) is the hazard of first birth for respondent \(i\) at time \(t\), \(h_0(t)\) is the unspecified baseline hazard, \(BirthControlEducation_i\) is an indicator for adolescent exposure to birth-control education, and \(W_i\) is a vector of respondent-level controls including sex, race and ethnicity, and educational attainment. The exponentiated coefficient for birth-control education is interpreted as a hazard ratio. A hazard ratio below one indicates that birth-control education is associated with a lower hazard of first birth at a given time, consistent with later entry into parenthood.
 
 All estimates are interpreted as associations. The fixed-effects model strengthens within-person comparison by adjusting for time-invariant respondent characteristics, but it does not eliminate bias from time-varying unobserved factors. The count models estimate associations with completed fertility but do not establish that financial literacy or birth-control education caused differences in fertility. The Cox model estimates differences in timing of first birth associated with birth-control education but cannot fully separate education exposure from family background, school context, local norms, or access to contraception.
 
-The results therefore identify structured longitudinal relationships among financial preparedness, birth-control education, marital stability, completed fertility, and first-birth timing. They should be read as evidence of association rather than definitive causal effects.
-
 % ************************************************************
-% END METHODS
+% END DATA AND METHODS
 % ************************************************************
-% Section Break
+% SECTION BREAK
 % ************************************************************
 % RESULTS
 % ************************************************************
 
 \section{Results}
 
-\subsection{Descriptive Patterns}
+\subsection{Descriptive Patterns and Analytic Samples}
 
-Descriptive results indicate meaningful variation in financial preparedness, birth-control education exposure, marital status, and fertility outcomes across the analytic samples. Because emergency savings, financial literacy, birth-control education, marital status, and fertility outcomes are not observed in every survey wave, sample size varies across models. The marital-stability models use repeated respondent-wave observations of marital status and emergency savings. The completed-fertility models use respondent-level fertility outcomes linked to financial literacy and adolescent birth-control education. The timing model uses fertility-history information to estimate age at first birth.
+Table~\ref{tab:descriptive_summary} reports exact descriptive values for the core analytic measures. Respondents averaged 1.715 children ever born in the constructed respondent-level file. Emergency savings were reported in 42.7\% of eligible respondent-wave observations. The mean observed financial-literacy score was 3.182, and 59.0\% of respondents had recorded exposure to birth-control education. These values describe the analytic measures used in the models rather than population estimates for all NLSY79 respondents.
 
-Across the model-specific samples, respondents averaged approximately 1.9 children ever born. Roughly 45\% of respondents reported having emergency savings in at least one observed wave, and approximately 35\% reported adolescent exposure to birth-control education. The financial-literacy index also varied across respondents, with a mean of approximately 3.2 in waves containing the financial-literacy items. These descriptive patterns indicate sufficient variation in the key predictors and outcomes to estimate the associations specified in the analytic models.
-
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
 \caption{Descriptive Summary of Core Analytic Measures}
 \label{tab:descriptive_summary}
-
-{\setlength{\fboxsep}{7pt}
-\noindent\fbox{%
-\begin{minipage}{0.96\textwidth}
-\small
-
-\boxrowfourclean
-{\textbf{Measure}}
-{\textbf{Approximate value}}
-{\textbf{Level}}
-{\textbf{Primary model use}}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.35em}
-
-\boxrowfourclean
-{Children ever born}
-{1.9}
-{Respondent}
-{Completed fertility models}
-
-\boxrowfourclean
-{Emergency savings reported}
-{45\%}
-{Respondent-wave}
-{Marital-stability model}
-
-\boxrowfourclean
-{Financial-literacy index}
-{3.2}
-{Respondent / wave-specific}
-{Completed fertility model}
-
-\boxrowfourclean
-{Birth-control education exposure}
-{35\%}
-{Respondent}
-{Fertility timing and completed fertility models}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.25em}
-
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{0.30\textwidth}p{0.18\textwidth}p{0.22\textwidth}p{0.30\textwidth}}
+\toprule
+\textbf{Measure} & \textbf{Exact value} & \textbf{Level} & \textbf{Primary model use} \\
+\midrule
+Children ever born & 1.715 & Respondent & Completed fertility models \\
+Emergency savings reported & 42.7\% & Respondent-wave & Marital-stability model \\
+Financial-literacy index & 3.182 & Respondent / wave-specific & Completed fertility model \\
+Birth-control education exposure & 59.0\% & Respondent & Fertility timing and completed fertility models \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{0.95\textwidth}
 \footnotesize
-\textit{Notes:} Values are descriptive approximations from the model-specific analytic samples. Sample size varies by model because the core predictors and outcomes are not observed in every wave for every respondent.
-
-\end{minipage}%
-}}
-
+\textit{Notes:} Values are descriptive summaries from the constructed analytic files. Sample size varies by model because the core predictors and outcomes are not observed in every wave for every respondent.
+\end{minipage}
 \end{table}
 
-% ************************************************************
-% RESULTS: MAIN MODEL ESTIMATES
-% ************************************************************
+Table~\ref{tab:model_samples} reports the model-specific analytic samples. The emergency-savings and marital-stability fixed-effects model uses 12,443 respondent-wave observations from 6,221 unique respondents. The completed-fertility count model uses 7,556 respondents, and the negative binomial robustness model uses the same respondent-level sample. The timing-of-first-birth model uses 10,777 respondents.
+
+\begin{table}[!htbp]
+\centering
+\caption{Model-Specific Analytic Samples}
+\label{tab:model_samples}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{0.46\textwidth}p{0.20\textwidth}p{0.17\textwidth}p{0.17\textwidth}}
+\toprule
+\textbf{Model} & \textbf{Observation level} & \textbf{Analytic observations} & \textbf{Unique respondents} \\
+\midrule
+Emergency savings and marital stability & Respondent-wave & 12,443 & 6,221 \\
+Completed fertility count model & Respondent & 7,556 & 7,556 \\
+Negative binomial robustness & Respondent & 7,556 & 7,556 \\
+Timing of first birth & Respondent & 10,777 & 10,777 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{0.95\textwidth}
+\footnotesize
+\textit{Notes:} Analytic observations are exact values from the final R output. The emergency-savings model is respondent-wave level; the remaining models are respondent level.
+\end{minipage}
+\end{table}
 
 \subsection{Main Model Estimates}
 
 Table~\ref{tab:main_results} reports the primary model estimates. In the respondent fixed-effects linear probability model, emergency savings were positively associated with marital stability. Within respondents, having an emergency fund sufficient to cover three months of expenses was associated with a 0.029 increase in the probability of being married or remarried rather than separated, divorced, widowed, or never married ($SE = 0.009$, $t = 3.23$, $p = .001$, 95\% CI [0.011, 0.046]). This estimate corresponds to an approximately 2.9 percentage-point within-person difference in marital stability across observed financial-preparedness states.
 
-The completed fertility models produced more mixed evidence for financial knowledge. The financial-literacy score was not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $z = -1.32$, $p = .185$, 95\% CI [-0.026, 0.005]). In contrast, adolescent birth-control education was negatively associated with completed fertility ($b = -0.038$, $SE = 0.017$, $z = -2.22$, $p = .026$, 95\% CI [-0.071, -0.004]). The Cox proportional hazards model for timing of first birth also indicated a lower hazard of first birth among respondents exposed to birth-control education ($HR = 0.930$, $SE = 0.024$, $z = -2.96$, $p = .003$, 95\% CI [0.887, 0.976]). These estimates are consistent with an association between reproductive education and delayed or reduced fertility, though they should not be interpreted as causal effects.
+The completed-fertility models produced more mixed evidence for financial knowledge. The financial-literacy score was not statistically associated with completed fertility in the Poisson model ($b = -0.010$, $SE = 0.008$, $z = -1.32$, $p = .185$, 95\% CI [-0.026, 0.005]). In contrast, adolescent birth-control education was negatively associated with completed fertility ($b = -0.038$, $SE = 0.017$, $z = -2.22$, $p = .026$, 95\% CI [-0.071, -0.004]). The Cox proportional hazards model for timing of first birth also indicated a lower hazard of first birth among respondents exposed to birth-control education ($HR = 0.930$, log-HR $SE = 0.024$, $z = -2.96$, $p = .003$, 95\% CI [0.887, 0.976]). These estimates are consistent with an association between reproductive education, lower completed fertility, and later entry into parenthood.
 
-Model-specific analytic samples varied by outcome and measurement structure. The emergency-savings and marital-stability fixed-effects model used 12,443 respondent-wave observations from 6,221 unique respondents. The completed fertility count model used 7,556 respondents, and the negative binomial robustness model used the same respondent-level sample. The timing-of-first-birth model used 10,777 respondents.
-
-% ************************************************************
-% END RESULTS: MAIN MODEL ESTIMATES
-% ************************************************************
-
-\subsection{Emergency Savings and Marital Stability}
-
-The fixed-effects panel model indicates a positive association between emergency savings and marital stability. The estimated coefficient for emergency savings is 0.664, with a robust standard error of 0.027. The corresponding test statistic is \(z = 24.59\), with \(p < .001\), and the 95\% confidence interval ranges from 0.611 to 0.717. Substantively, this estimate indicates that within respondents over time, reporting emergency savings is associated with a higher probability of being observed as married, net of respondent fixed effects and survey-year effects.
-
-The fixed-effects specification compares respondents to themselves over time rather than relying only on cross-sectional differences between respondents. This reduces bias from time-invariant respondent characteristics, including stable preferences, early-life background, and long-standing attitudes toward marriage or saving. The estimate should still be interpreted as associational because time-varying unobserved factors may affect both savings behavior and marital status.
-
-\subsection{Financial Literacy and Completed Fertility}
-
-The Poisson count model shows a positive association between financial literacy and completed fertility. The coefficient on the financial-literacy index is 0.0411, with \(z = 3.50\), \(p < .001\), and a 95\% confidence interval from 0.018 to 0.064. Expressed as an incidence rate ratio, the estimate is 1.042. This indicates that each additional point on the financial-literacy index is associated with approximately 4.2\% higher completed fertility.
-
-This result is consistent with the interpretation that financial knowledge and planning capacity may support long-run family formation. Respondents with higher financial literacy may be better positioned to evaluate childrearing costs, manage household resources, and align fertility decisions with economic capacity. The estimate does not establish that financial literacy causes higher fertility, but it supports the hypothesis that financial planning capacity is positively associated with completed childbearing.
-
-\subsection{Birth-Control Education and Completed Fertility}
-
-The count models indicate a negative association between adolescent birth-control education exposure and completed fertility. The Poisson estimate for birth-control education is \(-0.0810\), with \(z = -3.35\), \(p < .001\), and a 95\% confidence interval from \(-0.126\) to \(-0.035\). The corresponding incidence rate ratio is 0.922. This indicates that exposure to birth-control education is associated with approximately 7.8\% lower completed fertility relative to non-exposure.
-
-Negative binomial robustness checks produced substantively similar results. The estimated overdispersion parameter was modest, with \(\alpha = 0.14\), indicating mild overdispersion but not enough to alter the direction or interpretation of the main result. The consistency between Poisson and negative binomial specifications suggests that the observed relationship is not driven solely by count-model distributional assumptions.
-
-\subsection{Birth-Control Education and Timing of First Birth}
-
-The Cox proportional hazards model indicates that adolescent birth-control education exposure is associated with delayed entry into parenthood. The estimated hazard ratio is 0.91, with a standard error of 0.023, \(z = -3.77\), \(p < .001\), and a 95\% confidence interval from 0.87 to 0.96. Because the hazard ratio is below one, exposure to birth-control education is associated with a lower instantaneous rate of first birth at a given age, consistent with delayed timing of parenthood.
-
-This result aligns with the completed-fertility model. Birth-control education is associated not only with lower completed fertility, but also with later entry into parenthood. The combined pattern suggests that birth-control education may operate through timing as well as total fertility. Respondents exposed to birth-control education appear less likely to enter parenthood early, and this delay is associated with lower completed fertility over the life course.
-
-\begin{table}[htbp]
+\begin{table}[!htbp]
 \centering
-\caption{Regression Results for Financial Preparedness, Birth-Control Education, and Family Formation}
+\caption{Main Model Results for Financial Preparedness, Reproductive Education, and Family Formation}
 \label{tab:main_results}
-
-{\setlength{\fboxsep}{7pt}
-\noindent\fbox{%
-\begin{minipage}{0.96\textwidth}
-\small
-
-\boxrowsixclean
-{\textbf{Outcome}}
-{\textbf{Key predictor}}
-{\textbf{Model}}
-{\textbf{Estimate}}
-{\textbf{Test statistic}}
-{\textbf{95\% CI}}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.35em}
-
-\boxrowsixclean
-{Marital stability}
-{Emergency savings}
-{Fixed effects}
-{0.664}
-{\(z = 24.59\)}
-{[0.611, 0.717]}
-
-\boxrowsixclean
-{Completed fertility}
-{Financial literacy}
-{Poisson}
-{0.0411}
-{\(z = 3.50\)}
-{[0.018, 0.064]}
-
-\boxrowsixclean
-{Completed fertility}
-{Birth-control education}
-{Poisson}
-{\(-0.0810\)}
-{\(z = -3.35\)}
-{[-0.126, -0.035]}
-
-\boxrowsixclean
-{Timing of first birth}
-{Birth-control education}
-{Cox PH}
-{0.91}
-{\(z = -3.77\)}
-{[0.87, 0.96]}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.25em}
-
-\footnotesize
-\textit{Notes:} The estimate for the Cox proportional hazards model is reported as a hazard ratio. Poisson estimates are log-count coefficients; corresponding incidence rate ratios are reported in Table~\ref{tab:substantive_interpretation}. Cox PH = Cox proportional hazards. Standard errors are robust where available and clustered at the respondent level in panel specifications. All estimates are interpreted as associations rather than causal effects.
-
-\end{minipage}%
-}}
-
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{0.18\textwidth}p{0.19\textwidth}p{0.17\textwidth}p{0.10\textwidth}p{0.10\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.07\textwidth}p{0.14\textwidth}}
+\toprule
+\textbf{Outcome} & \textbf{Predictor} & \textbf{Model} & \textbf{Metric} & \textbf{Estimate} & \textbf{SE} & \textbf{Statistic} & \textbf{$p$} & \textbf{95\% CI} \\
+\midrule
+Marital stability & Emergency savings & Respondent FE LPM & Coefficient & 0.029 & 0.009 & $t = 3.23$ & .001 & [0.011, 0.046] \\
+Completed fertility & Financial-literacy score & Poisson & Coefficient & -0.010 & 0.008 & $z = -1.32$ & .185 & [-0.026, 0.005] \\
+Completed fertility & Birth-control education & Poisson & Coefficient & -0.038 & 0.017 & $z = -2.22$ & .026 & [-0.071, -0.004] \\
+Timing of first birth & Birth-control education & Cox PH & HR & 0.930 & 0.024 & $z = -2.96$ & .003 & [0.887, 0.976] \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{0.95\textwidth}
+\footnotesize \textit{Notes:} FE = fixed effects. LPM = linear probability model. HR = hazard ratio. Poisson estimates are log-count coefficients. For the Cox PH row, the estimate is reported as a hazard ratio and the standard error is for the log-hazard coefficient. Standard errors are robust where available and clustered at the respondent level in panel specifications. All estimates are interpreted as associations rather than causal effects. The financial-literacy coefficient is not statistically different from zero in the primary Poisson model.
+\end{minipage}
 \end{table}
 
-\begin{table}[htbp]
+\subsection{Robustness and Diagnostics}
+
+Robustness checks support the main interpretation while also clarifying the limits of the evidence. The negative binomial model for completed fertility was estimated to evaluate whether the fertility associations were sensitive to overdispersion in the count outcome. The direction of the birth-control education association remained negative, while the financial-literacy association remained substantively small. This pattern indicates that the main fertility conclusions are not driven solely by the Poisson distributional assumption.
+
+The Cox proportional hazards model provides a timing-based robustness check for the birth-control education result. The hazard ratio below one indicates that respondents exposed to adolescent birth-control education had a lower observed hazard of first birth at a given time. This finding is consistent with later entry into parenthood and complements the completed-fertility result. The timing and completed-fertility models therefore point in the same broad direction for reproductive education, although neither model establishes causality.
+
+Diagnostic review also reinforces the need for cautious interpretation. Emergency savings are measured only in later waves, so the fixed-effects model estimates within-person associations over the observed adult period rather than over the full life course. Financial-literacy items are also available only in selected later waves, limiting the ability to distinguish long-standing financial knowledge from knowledge accumulated after family formation. Birth-control education is measured retrospectively and does not capture curriculum quality, contraceptive access, or actual contraceptive behavior. These measurement constraints support interpreting the results as structured associations rather than causal estimates.
+
+\begin{table}[!htbp]
 \centering
-\caption{Substantive Interpretation of Main Estimates}
-\label{tab:substantive_interpretation}
-
-{\setlength{\fboxsep}{7pt}
-\noindent\fbox{%
-\begin{minipage}{0.96\textwidth}
-\small
-
-\boxrowfourclean
-{\textbf{Predictor}}
-{\textbf{Outcome}}
-{\textbf{Effect metric}}
-{\textbf{Interpretation}}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.35em}
-
-\boxrowfourclean
-{Emergency savings}
-{Marital stability}
-{\(b = 0.664\)}
-{Higher probability of being married within respondent over time}
-
-\boxrowfourclean
-{Financial literacy}
-{Completed fertility}
-{IRR = 1.042}
-{Approximately 4.2\% higher completed fertility per index point}
-
-\boxrowfourclean
-{Birth-control education}
-{Completed fertility}
-{IRR = 0.922}
-{Approximately 7.8\% lower completed fertility relative to non-exposure}
-
-\boxrowfourclean
-{Birth-control education}
-{Timing of first birth}
-{HR = 0.91}
-{Lower hazard of first birth, consistent with delayed parenthood}
-
-\vspace{-0.35em}
-\boxtablerule
-\vspace{0.25em}
-
+\caption{Robustness and Diagnostic Summary}
+\label{tab:robustness}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{0.30\textwidth}p{0.28\textwidth}p{0.42\textwidth}}
+\toprule
+\textbf{Check} & \textbf{Purpose} & \textbf{Interpretation} \\
+\midrule
+Negative binomial count model & Assess sensitivity to overdispersion in completed fertility & Birth-control education remains negatively associated with completed fertility; financial literacy remains substantively small. \\
+Cox proportional hazards model & Assess timing of first birth & Birth-control education is associated with a lower hazard of first birth, consistent with later entry into parenthood. \\
+Respondent fixed effects & Adjust for time-invariant respondent characteristics & Emergency savings are positively associated with marital stability within respondents over time. \\
+Model-specific samples & Preserve available observations across uneven measurement waves & Sample sizes differ by model because emergency savings, financial literacy, fertility, and birth-control education are not observed in every wave. \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{minipage}{0.95\textwidth}
 \footnotesize
-\textit{Notes:} IRR = incidence rate ratio. HR = hazard ratio. Interpretations describe model-based associations, not causal effects.
-
-\end{minipage}%
-}}
-
+\textit{Notes:} Robustness checks are interpreted as sensitivity evidence, not as proof of causal identification.
+\end{minipage}
 \end{table}
-
-\subsection{Model Diagnostics and Robustness Checks}
-
-Model diagnostics support the use of the selected specifications. For the marital-stability analysis, fixed-effects and random-effects specifications were compared using the Hausman test. The test favored the fixed-effects specification, indicating that unobserved respondent-level characteristics were correlated with the predictors. Heteroskedasticity diagnostics supported the use of robust standard errors, and standard errors were clustered at the respondent level in the panel models.
-
-For the completed-fertility models, negative binomial estimation was used as a robustness check against overdispersion in the Poisson models. The direction and substantive interpretation of the estimates remained consistent with the Poisson specifications. For the timing-of-first-birth model, Schoenfeld residual diagnostics did not reject the proportional hazards assumption, supporting the use of the Cox proportional hazards specification.
-
-Additional robustness checks examined whether the relationship between emergency savings and marital stability varied by sex, race and ethnicity, or education. The interaction terms were not statistically significant, suggesting that the association between emergency savings and marital stability was broadly consistent across these observed demographic groups. Lagged savings specifications were also explored to reduce simultaneity concerns. Although the lagged models reduced sample size, the estimated association remained positive.
-
-\subsection{Summary of Findings}
-
-Across specifications, the results show a consistent pattern. Financial preparedness is positively associated with marital stability and completed fertility, while adolescent birth-control education is associated with delayed first birth and lower completed fertility. Emergency savings show the strongest association with marital stability, consistent with the view that household liquidity may buffer marital relationships against financial stress. Financial literacy is positively associated with completed fertility, suggesting that planning capacity may support family formation. Birth-control education is negatively associated with both the timing and total number of births, suggesting that reproductive knowledge may increase control over fertility timing and reduce completed fertility.
 
 % ************************************************************
 % END RESULTS
 % ************************************************************
-
-
 % SECTION BREAK
 % ************************************************************
 % DISCUSSION
@@ -575,54 +317,39 @@ Across specifications, the results show a consistent pattern. Financial prepared
 
 \section{Discussion}
 
-This study examined how financial preparedness and adolescent birth-control education are associated with marital stability, completed fertility, and timing of first birth in the NLSY79 cohort. The findings point to three linked but distinct patterns. Emergency savings are positively associated with marital stability in fixed-effects models. Financial literacy is positively associated with completed fertility. Birth-control education is associated with lower completed fertility and delayed entry into parenthood. Taken together, these results suggest that financial preparedness and reproductive knowledge operate through different life-course channels: financial preparedness is associated with household continuity and greater completed fertility, while birth-control education is associated with later and smaller fertility patterns.
+This study examined associations between financial preparedness, reproductive education, and long-run family-formation outcomes in the NLSY79. The results indicate that emergency savings are positively associated with marital stability within respondents over time. This finding is consistent with family-economics theories emphasizing the role of household resources, uncertainty, and risk buffering in marital continuity. A liquid emergency buffer may reduce short-term financial strain, limit conflict over unexpected expenses, and help households absorb adverse shocks without immediate destabilization.
 
-The emergency-savings result is consistent with family-economic theory and prior evidence linking financial strain to marital disruption. Marriage involves resource pooling, shared consumption, risk management, and long-term planning \citep{becker1981}. A household with emergency savings may be better able to absorb income shocks, unexpected expenses, medical costs, housing stress, or short-term employment instability. This buffer may reduce the financial conflict that often accompanies household instability. Prior research has found that job displacement, unemployment, and financial conflict are associated with marital dissolution \citep{charles2004,dew2012,keldenich2022}. The present findings extend that logic by focusing specifically on liquid financial preparedness rather than income alone. Emergency savings appear to function as a marker of short-term household resilience.
+The fertility results point to a more differentiated pattern. Financial literacy was not statistically associated with completed fertility in the primary Poisson model. This finding weakens a simple interpretation that financial knowledge alone is linked to higher completed fertility in this cohort. It may be that broad financial-literacy items measured later in life do not capture the specific planning capacities relevant to earlier fertility decisions. It may also be that financial literacy operates through income, education, employment, partnership stability, or household wealth rather than through a direct association with the number of children ever born.
 
-The positive association between financial literacy and completed fertility also fits a planning-capacity interpretation. Fertility decisions require households to evaluate future costs, housing needs, employment tradeoffs, childcare constraints, debt obligations, and long-run resource availability. Financial literacy may help individuals and couples convert fertility intentions into completed family size by improving their ability to plan, budget, and manage uncertainty \citep{lusardi2011}. This interpretation is consistent with broader arguments that modern fertility depends partly on whether families can reconcile childbearing with employment, economic security, and institutional constraints \citep{doepke2022}. The result should not be read as evidence that financial literacy directly causes higher fertility. Financial literacy may also proxy for education, future orientation, cognitive skills, income potential, or household stability. Still, the association suggests that financial knowledge belongs within models of family formation, not only within models of retirement preparedness or household finance.
+Adolescent birth-control education was negatively associated with completed fertility and was also associated with later entry into parenthood in the Cox proportional hazards model. This pattern is consistent with a life-course interpretation in which reproductive knowledge is linked to greater control over pregnancy timing, delayed first birth, and smaller completed family size. The finding aligns with prior research showing that contraception and reproductive control can alter schooling, work, marriage, and fertility trajectories \citep{goldin2002,bailey2010,kearney2009,lindberg2016,myers2017}. At the same time, the measure used here captures reported exposure to birth-control education, not curriculum quality, contraceptive access, or contraceptive behavior.
 
-The birth-control education findings show a different pattern. Respondents exposed to birth-control education have lower completed fertility and a lower hazard of first birth. These findings are consistent with the expectation that reproductive knowledge increases control over fertility timing. Prior research has shown that contraception access and reproductive control changed women's education, career planning, marriage timing, and fertility behavior in the United States \citep{goldin2002,bailey2010}. Related studies also link contraception policy and adolescent reproductive behavior to fertility timing and teen birth reductions \citep{kearney2009,lindberg2016,myers2017}. The present findings are consistent with this literature, but they focus on reported educational exposure rather than direct contraceptive access. Birth-control education may delay first birth by increasing knowledge of pregnancy prevention and by allowing respondents to sequence schooling, work, partnership, and parenthood differently.
+The results contribute to family economics by showing that financial preparedness and reproductive education appear to map onto different family-formation outcomes. Emergency savings are more clearly linked to household continuity, while birth-control education is more clearly linked to fertility timing and completed fertility. Financial literacy, at least as measured in the available later-life survey items, does not show a statistically detectable association with completed fertility in the primary model. Taken together, the findings suggest that economic resilience and reproductive knowledge should be treated as distinct but related components of family-formation processes.
 
-The contrast between financial preparedness and birth-control education is central to the contribution of this study. Emergency savings and financial literacy are associated with greater household stability and higher completed fertility, while birth-control education is associated with delayed and lower fertility. These findings are not contradictory. They suggest that different forms of preparedness may influence different margins of family formation. Financial preparedness may make family formation more feasible once individuals enter stable adult roles. Birth-control education may increase the ability to delay or avoid early parenthood, thereby changing the timing and eventual number of births. In this sense, economic preparedness and reproductive knowledge are not substitutes. They are distinct forms of life-course capacity.
-
-These results have implications for family economics. Fertility decline is often discussed in terms of preferences, values, opportunity costs, or macroeconomic uncertainty. Those explanations are important, but they can understate the role of household-level preparedness. The findings suggest that family formation should be studied through both economic readiness and reproductive control. A household may desire children but lack the financial stability to support them. Another household may possess reproductive knowledge that allows delayed childbearing, but delay may later reduce completed fertility. Understanding fertility therefore requires attention to both the capacity to avoid unintended early births and the capacity to support intended later births.
-
-The findings also speak to policy debates, though the estimates should not be interpreted as policy treatment effects. Programs that improve household liquidity, reduce financial fragility, or increase practical financial knowledge may indirectly support family stability and planned fertility. At the same time, birth-control education remains associated with delayed first birth, a pattern that may reflect greater control over life-course sequencing. Policies aimed at strengthening families should not treat these domains as opposing priorities. Financial preparedness and reproductive education may both support family well-being, but through different mechanisms and at different points in the life course.
-
-Several cautions are necessary. The study estimates associations, not causal effects. Fixed effects reduce bias from time-invariant respondent characteristics, but time-varying unobserved factors may still influence both emergency savings and marital status. Financial literacy may reflect broader socioeconomic advantage rather than financial knowledge alone. Birth-control education may be correlated with school quality, family background, local norms, religious context, or access to contraception. In addition, completed fertility for the NLSY79 cohort reflects the historical circumstances of respondents born between 1957 and 1964. The associations estimated here may not generalize directly to younger cohorts facing different labor markets, housing costs, gender norms, student debt burdens, and contraceptive environments.
-
-Despite these limitations, the results provide a coherent longitudinal account of how economic and reproductive forms of preparedness are associated with family formation. Emergency savings are linked to marital stability. Financial literacy is linked to completed fertility. Birth-control education is linked to delayed first birth and lower completed fertility. The broader implication is that fertility and family stability are shaped not only by preferences or demographic trends, but by the resources and knowledge that allow individuals to manage risk, sequence life events, and sustain households over time.
+These results should be interpreted in light of the observational design. Respondent fixed effects adjust for time-invariant individual characteristics in the emergency-savings model, but they do not eliminate bias from time-varying unobserved conditions such as job loss, health shocks, income changes, or relationship quality. The fertility and timing models are respondent-level and cannot fully adjust for family background, school context, local policy conditions, religious norms, or access to contraception. The findings therefore identify structured associations rather than causal effects.
 
 % ************************************************************
 % END DISCUSSION
 % ************************************************************
 % SECTION BREAK
-
 % ************************************************************
 % LIMITATIONS
 % ************************************************************
 
 \section{Limitations}
 
-The findings should be interpreted as evidence of structured longitudinal associations rather than causal effects. The fixed-effects marital-stability model adjusts for stable respondent characteristics, but it cannot remove bias from time-varying factors that may influence both emergency savings and marital status. Changes in employment, health, household income, debt, caregiving demands, relationship quality, or partner characteristics may affect both the ability to maintain liquid savings and the probability of being observed as married. The completed-fertility and first-birth timing models are subject to similar concerns because financial literacy, birth-control education, and fertility outcomes may reflect broader family background, institutional context, and life-course selection.
+Several limitations should guide interpretation of the findings. The analysis is observational, and causal identification is limited. Respondent fixed effects account for stable unobserved individual characteristics in the marital-stability model, but time-varying unobserved factors may still confound the association between emergency savings and marital status. Employment shocks, health changes, income fluctuations, relationship quality, and caregiving obligations could affect both financial preparedness and marital stability.
 
-Measurement limitations also shape interpretation. Emergency savings captures reported ability to cover several months of expenses, but it does not measure total wealth, household debt, credit access, informal family support, home equity, income volatility, or asset liquidity beyond the survey item. Financial literacy is measured through available financial-knowledge and self-assessment items, so it should be understood as an index of financial knowledge and perceived management capacity rather than a complete measure of household economic competence. Birth-control education captures reported exposure to instruction about contraception and related reproductive-health topics, but it does not measure curriculum quality, instructional intensity, teacher effectiveness, parental attitudes, religious context, contraceptive access, or contraceptive behavior.
+Measurement timing also constrains inference. Emergency savings and financial-literacy items are measured in later waves, after many respondents had already made major marriage and fertility decisions. This structure limits the ability to determine whether financial knowledge preceded fertility outcomes or reflected later-life experience. The financial-literacy null result should therefore be interpreted as evidence that the constructed later-wave measure is not statistically associated with completed fertility in the primary model, rather than as evidence that financial knowledge is irrelevant to fertility decisions more broadly.
 
-The model-specific samples reflect the structure of the NLSY79 rather than a single balanced panel. Emergency savings and financial-literacy items are concentrated in later survey waves, while birth-control education is measured earlier in the life course. The marital-stability, completed-fertility, and first-birth timing models therefore draw on different analytic samples. This preserves available information for each outcome, but it limits direct comparison across models and may introduce differences in sample composition.
+The birth-control education measure is also limited. It captures reported exposure to adolescent instruction about contraception or reproductive health, but it does not measure curriculum quality, instructional intensity, contraceptive access, family norms, religious context, school policy, or actual contraceptive behavior. Because exposure may be correlated with school environment, family background, community norms, and local policy, the association between birth-control education and fertility timing should not be interpreted as a clean causal estimate.
 
-Completed fertility and timing of first birth are shaped by processes that are only partially observed in the available data. Fertility outcomes may reflect partnership histories, infertility, pregnancy loss, health status, housing costs, local labor markets, childcare availability, religious norms, family preferences, and partner fertility intentions. The models include core demographic and educational controls, but they cannot fully capture the social, relational, biological, and institutional conditions that shape childbearing.
+The model-specific sample design preserves available information but creates differences in analytic samples across outcomes. Emergency savings, financial literacy, marital status, fertility histories, and birth-control education are not observed uniformly across all respondents and waves. As a result, estimates from one model should not be read as if they came from the same balanced sample as estimates from another model.
 
-The historical setting of the NLSY79 cohort also limits generalizability. Respondents were born between 1957 and 1964, and their schooling, early employment, marriage, and fertility decisions occurred under economic and social conditions that differ from those facing younger cohorts. Housing costs, student debt, labor-market insecurity, childcare constraints, contraceptive access, gender norms, and expectations surrounding marriage and parenthood have changed substantially. The results are therefore most appropriately interpreted as evidence from one cohort’s life-course experience rather than as direct estimates for contemporary young adults.
-
-Attrition and missing data may also affect the estimates. NLSY79 special missing-value codes were recoded before analysis, and each model was estimated using observations with complete information for the relevant variables. This approach avoids imputing dependent variables and maintains transparent sample construction, but it may introduce bias if missingness is related to marital instability, financial hardship, fertility behavior, or survey participation. Respondents with more unstable life courses may be less consistently observed, which could affect estimates of both financial preparedness and family formation.
-
-These limitations do not undermine the contribution of the analysis, but they define its scope. The results show that emergency savings, financial literacy, and birth-control education are systematically associated with marital stability, completed fertility, and timing of first birth in the NLSY79. They do not establish that changing any single financial or educational measure would produce the same family-formation outcomes in another cohort or policy environment.
+Public-use data restrictions impose additional constraints. The analysis does not use restricted geographic identifiers, school-level context, local policy measures, or administrative records. These limitations reduce the ability to examine place-based variation in reproductive education, local labor markets, housing conditions, or institutional access. The results are therefore best interpreted as national cohort-level associations using public-use longitudinal data.
 
 % ************************************************************
 % END LIMITATIONS
 % ************************************************************
-
-
 % SECTION BREAK
 % ************************************************************
 % CONCLUSION
@@ -630,15 +357,13 @@ These limitations do not undermine the contribution of the analysis, but they de
 
 \section{Conclusion}
 
-This study examined how financial preparedness and adolescent birth-control education are associated with marital stability, completed fertility, and timing of first birth in the NLSY79 cohort. The results show a coherent pattern across model specifications. Emergency savings are positively associated with marital stability, financial literacy is positively associated with completed fertility, and birth-control education is associated with both delayed first birth and lower completed fertility. These findings support a life-course interpretation in which economic preparedness and reproductive knowledge shape different dimensions of family formation.
+This study examined whether financial preparedness and adolescent reproductive education are associated with marital stability, completed fertility, and timing of first birth in the NLSY79. The results show that emergency savings are positively associated with marital stability within respondents over time. Financial literacy is not statistically associated with completed fertility in the primary Poisson model. Adolescent exposure to birth-control education is associated with lower completed fertility and later entry into parenthood.
 
-The contribution of the study is its integration of household financial preparedness and birth-control education within a single longitudinal family-economics framework. Emergency savings capture liquid resilience that may help households manage financial shocks and sustain marital continuity. Financial literacy captures planning capacity that may support long-term family formation. Birth-control education captures early exposure to reproductive knowledge that may increase control over the timing of parenthood. The results suggest that these forms of preparedness operate through distinct but connected pathways rather than through a single mechanism.
+These findings suggest that financial liquidity and reproductive education correspond to different parts of the family-formation process. Emergency savings appear most relevant to household continuity, while reproductive education appears more closely linked to fertility timing and completed family size. The absence of a statistically significant financial-literacy association cautions against treating general financial knowledge as a direct predictor of completed fertility, particularly when measured later in adulthood.
 
-The findings also clarify how fertility and marital stability should be interpreted in relation to household resources. Fertility decline is often discussed through broad demographic, cultural, or macroeconomic explanations, but this analysis shows that individual and household-level preparedness remain relevant. Financial preparedness appears associated with greater family stability and higher completed fertility, while birth-control education appears associated with delayed and lower fertility. These patterns are not contradictory. They indicate that the ability to avoid early or unintended parenthood and the ability to sustain later family formation are separate dimensions of life-course capacity.
+The study contributes to family economics by integrating household financial preparedness, reproductive education, marital stability, completed fertility, and first-birth timing within a single longitudinal framework. By using the NLSY79, the analysis links adolescent reproductive education and adult financial-preparedness measures to long-run family outcomes across the life course. The evidence remains associational, but it points to a useful conceptual distinction: liquidity may matter most for sustaining households, while reproductive knowledge may matter most for timing parenthood and shaping completed fertility.
 
-The analysis remains associational and should not be read as evidence that emergency savings, financial literacy, or birth-control education independently cause the observed family outcomes. The estimates are nonetheless informative because they show durable relationships across adulthood in a nationally important longitudinal cohort. For family economics, the results point toward a broader account of family formation in which economic resilience, financial knowledge, and reproductive education jointly shape the timing, stability, and scale of family life.
-
-Future research should examine whether similar associations appear in younger cohorts facing different labor markets, housing costs, debt burdens, childcare constraints, contraceptive environments, and marriage norms. Further work should also incorporate richer measures of wealth, debt, partner characteristics, contraceptive behavior, curriculum quality, and local institutional context. The present study provides a foundation for that work by showing that financial preparedness and birth-control education are meaningfully associated with long-run family-formation outcomes in the NLSY79.
+Future research should examine these pathways with stronger causal designs, earlier measures of financial knowledge, richer data on curriculum content and contraceptive access, and restricted contextual information on local schools, labor markets, and policy environments. Such work would help clarify whether the associations documented here reflect direct effects of preparedness and reproductive education, broader socioeconomic selection, or interactions among family background, education, and institutional context.
 
 % ************************************************************
 % END CONCLUSION
@@ -652,57 +377,45 @@ Future research should examine whether similar associations appear in younger co
 
 \subsection*{Funding}
 
-No funds, grants, or other support were received for conducting this study or preparing this manuscript.
+The author received no financial support for the research, authorship, or publication of this article.
 
 \subsection*{Competing Interests}
 
-The author has no relevant financial or non-financial interests to disclose.
+The author declares no competing interests.
 
 \subsection*{Ethics Approval}
 
-The present study uses de-identified public-use secondary data from the National Longitudinal Survey of Youth 1979. No new human-subjects data were collected, and the analysis did not involve direct interaction with participants or use of restricted identifiable records.
+This study used de-identified public-use data from the National Longitudinal Survey of Youth 1979. No human subjects research involving identifiable private information was conducted by the author for this manuscript.
 
 \subsection*{Consent to Participate}
 
-Not applicable to the present secondary analysis of de-identified public-use data.
+Not applicable. The analysis used secondary de-identified public-use survey data.
 
 \subsection*{Consent for Publication}
 
-Not applicable. The manuscript does not contain identifiable individual-level information.
+Not applicable. No individual-level identifiable information is reported.
 
-\subsection*{Data, Materials, and Code Availability}
+\subsection*{Data Availability}
 
-The data analyzed in this study are available through the public-use National Longitudinal Survey of Youth 1979 data system maintained by the U.S. Bureau of Labor Statistics and NORC at the University of Chicago. The analytic file was constructed from selected public-use variables measuring marital status, fertility histories, education, household composition, emergency savings, financial literacy, and birth-control education exposure. Analytic code can be made available by the author upon reasonable request.
+The NLSY79 public-use data are available from the U.S. Bureau of Labor Statistics and the NLS Investigator platform. The analytic code and manuscript materials are intended to be made available in the project repository, subject to public-use data redistribution rules and repository documentation.
 
 \subsection*{Author Contributions}
 
-The author was responsible for the study conception and design, data construction, statistical analysis, interpretation of findings, manuscript drafting, and manuscript revision.
-
-\subsection*{Acknowledgments}
-
-The author acknowledges the U.S. Bureau of Labor Statistics and NORC at the University of Chicago for maintaining and providing access to the public-use NLSY79 data.
+The author was responsible for conceptualization, data construction, analysis, interpretation, and manuscript preparation.
 
 % ************************************************************
 % END DECLARATIONS
 % ************************************************************
-% Section BREAK
+% SECTION BREAK
 % ************************************************************
 % REFERENCES
 % ************************************************************
 
-\clearpage
-
-\begingroup
-\renewcommand{\refname}{\hfill References\hfill\null}
-\renewcommand{\bibname}{\hfill References\hfill\null}
-
 \bibliographystyle{apalike}
 \bibliography{references}
-
-\endgroup
 
 % ************************************************************
 % END REFERENCES
 % ************************************************************
-% You need serious help if you are reading this. 
+
 \end{document}
