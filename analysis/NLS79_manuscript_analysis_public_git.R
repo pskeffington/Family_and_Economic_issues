@@ -377,6 +377,9 @@ cox_data <- first_birth_data |>
 
 m4_cox <- survival::coxph(survival::Surv(time_to_first_birth, event_first_birth) ~ birth_control_education + education + sex + race_ethnicity + cluster(id), data = cox_data, robust = TRUE)
 m4_result <- robust_row_cox(m4_cox, "birth_control_education", "Timing of first birth", "Birth-control education")
+m4_n_obs <- nrow(cox_data)
+m4_n_respondents <- dplyr::n_distinct(cox_data$id)
+m4_n_events <- sum(cox_data$event_first_birth == 1, na.rm = TRUE)
 
 # -----------------------------
 # 8. Export exact audit tables
@@ -396,8 +399,8 @@ descriptive_summary <- tibble::tibble(
 model_samples <- tibble::tibble(
   Model = c("Emergency savings and marital stability", "Completed fertility count model", "Negative binomial robustness", "Timing of first birth"),
   `Observation level` = c("Respondent-wave", "Respondent", "Respondent", "Respondent"),
-  `Analytic observations` = c(m1_n_obs, model_n(m2_poisson), model_n(m3_nb), model_n(m4_cox)),
-  `Unique respondents` = c(m1_n_respondents, dplyr::n_distinct(poisson_data$id), dplyr::n_distinct(poisson_data$id), dplyr::n_distinct(cox_data$id))
+  `Analytic observations` = c(m1_n_obs, model_n(m2_poisson), model_n(m3_nb), m4_n_obs),
+  `Unique respondents` = c(m1_n_respondents, dplyr::n_distinct(poisson_data$id), dplyr::n_distinct(poisson_data$id), m4_n_respondents)
 )
 
 main_results <- dplyr::bind_rows(m1_result, m2_fin_result, m2_bc_result, m4_result)
@@ -409,12 +412,13 @@ cox_zph <- tryCatch(survival::cox.zph(m4_cox), error = function(e) NULL)
 cox_global_p <- if (!is.null(cox_zph) && "GLOBAL" %in% rownames(cox_zph$table)) cox_zph$table["GLOBAL", "p"] else NA_real_
 
 robustness_diagnostics <- tibble::tibble(
-  Check = c("Poisson overdispersion ratio", "Negative binomial theta", "Birth-control education IRR in negative binomial model", "Cox proportional hazards global test"),
-  `Exact value` = c(format_num(poisson_overdispersion, 3), format_num(m3_nb$theta, 3), m3_bc_nb_irr$Estimate, format_p(cox_global_p)),
+  Check = c("Poisson overdispersion ratio", "Negative binomial theta", "Birth-control education IRR in negative binomial model", "Cox first-birth events", "Cox proportional hazards global test"),
+  `Exact value` = c(format_num(poisson_overdispersion, 3), format_num(m3_nb$theta, 3), m3_bc_nb_irr$Estimate, as.character(m4_n_events), format_p(cox_global_p)),
   Interpretation = c(
     "Values above 1 indicate overdispersion relative to the Poisson variance assumption.",
     "Larger theta indicates less overdispersion in the negative binomial parameterization.",
     "Robustness estimate for the birth-control education association with completed fertility.",
+    "Number of observed first-birth events in the Cox estimation sample; this is not the same as the respondent-level analytic sample size.",
     "Non-significant global test supports the proportional-hazards assumption."
   )
 )
@@ -459,3 +463,5 @@ cat("Tables and audit files written to: ", normalizePath(OUTPUT_DIR), "\n\n", se
 print(main_results)
 cat("\nModel-specific samples:\n")
 print(model_samples)
+cat("\nCox first-birth events:\n")
+print(m4_n_events)
