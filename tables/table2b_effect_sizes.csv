@@ -1,0 +1,5 @@
+"Outcome","Predictor","Model","Metric","Estimate","CI_95"
+"Completed fertility","Financial-literacy score","Poisson","IRR","0.990","[0.974, 1.005]"
+"Completed fertility","Birth-control education","Poisson","IRR","0.963","[0.931, 0.996]"
+"Completed fertility","Birth-control education","Negative binomial","IRR","0.963","[0.931, 0.996]"
+"Timing of first birth","Birth-control education","Cox PH","HR","0.930","[0.887, 0.976]"

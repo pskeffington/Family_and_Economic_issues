@@ -1,0 +1,5 @@
+"Outcome","Predictor","Model","Metric","Estimate","SE","Statistic","p","CI_95"
+"Marital stability","Emergency savings","Respondent FE LPM","Coefficient","0.029","0.009","t = 3.23",".001","[0.011, 0.046]"
+"Completed fertility","Financial-literacy score","Poisson","Coefficient","-0.010","0.008","z = -1.32",".185","[-0.026, 0.005]"
+"Completed fertility","Birth-control education","Poisson","Coefficient","-0.038","0.017","z = -2.22",".026","[-0.071, -0.004]"
+"Timing of first birth","Birth-control education","Cox PH","HR","0.930","0.024","z = -2.96",".003","[0.887, 0.976]"
