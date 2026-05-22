@@ -20,10 +20,10 @@ This roadmap defines the work needed before the repository should be treated as 
 
 ## Phase 2 — Citation verification
 
-- [ ] Verify every `.bib` entry against DOI, CrossRef, PubMed, publisher pages, NBER, BLS, NLS Investigator, or official report pages.
-- [ ] Check in-text citation and bibliography parity.
-- [ ] Normalize capitalization in article and report titles.
-- [ ] Remove or flag any unverified citation.
+- [x] Verify every `.bib` entry against DOI, CrossRef, PubMed, publisher pages, NBER, BLS, NLS Investigator, or official report pages.
+- [x] Check in-text citation and bibliography parity.
+- [x] Normalize capitalization in article and report titles.
+- [x] Remove or flag any unverified citation.
 
 ## Phase 3 — Analysis reproducibility
 
