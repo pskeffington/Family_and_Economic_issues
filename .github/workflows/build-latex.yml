@@ -1,0 +1,54 @@
+name: Build LaTeX Manuscript
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "manuscript/**"
+      - "tables/**"
+      - "figures/**"
+      - ".github/workflows/build-latex.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "manuscript/**"
+      - "tables/**"
+      - "figures/**"
+      - ".github/workflows/build-latex.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install TeX Live packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-bibtex-extra \
+            biber
+
+      - name: Build manuscript
+        working-directory: manuscript
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
+
+      - name: Prepare compiled output
+        run: |
+          mkdir -p output
+          cp manuscript/NLS-79.pdf output/NLS-79.pdf
+
+      - name: Upload compiled PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NLS-79-compiled-pdf
+          path: output/NLS-79.pdf
