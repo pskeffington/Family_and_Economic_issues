@@ -45,6 +45,6 @@ This roadmap defines the work needed before the repository should be treated as 
 
 - [x] Produce clean blinded manuscript PDF.
 - [x] Prepare source `.tex` and `.bib` materials.
-- [ ] Produce upload archive only if required by the journal portal.
+- [x] Produce upload archive only if required by the journal portal.
 - [x] Prepare cover letter.
 - [x] Prepare replication/readme materials where shareable.
