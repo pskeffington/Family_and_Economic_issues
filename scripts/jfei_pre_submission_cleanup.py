@@ -30,6 +30,8 @@ FORBIDDEN_BLINDED_TERMS = [
     "Skeffington",
     "Dartmouth College",
     "Dartmouth",
+    "Statements and Declarations",
+    "Declarations",
     "Author Contributions",
     "Acknowledgements",
     "Competing Interests",
@@ -38,6 +40,35 @@ FORBIDDEN_BLINDED_TERMS = [
     "Consent for Publication",
     "Funding",
 ]
+
+
+def remove_declarations_block(text: str) -> str:
+    """Remove declarations material from a blinded manuscript source."""
+    text = re.sub(
+        r"\n% \*{60}\n% STATEMENTS AND DECLARATIONS.*?(?=\n% \*{60}\n% REFERENCES)",
+        "\n",
+        text,
+        flags=re.S,
+    )
+    text = re.sub(
+        r"\n% \*{60}\n% DECLARATIONS.*?(?=\n% \*{60}\n% REFERENCES)",
+        "\n",
+        text,
+        flags=re.S,
+    )
+    text = re.sub(
+        r"\n\\section\*\{Statements and Declarations\}.*?(?=\n% \*{60}\n% REFERENCES)",
+        "\n",
+        text,
+        flags=re.S,
+    )
+    text = re.sub(
+        r"\n\\section\*\{Declarations\}.*?(?=\n% \*{60}\n% REFERENCES)",
+        "\n",
+        text,
+        flags=re.S,
+    )
+    return text
 
 
 def main() -> int:
@@ -53,19 +84,7 @@ def main() -> int:
         count=1,
     )
 
-    text = re.sub(
-        r"% \*{60}\n% DECLARATIONS.*?% \*{60}\n% END DECLARATIONS\n",
-        "",
-        text,
-        flags=re.S,
-    )
-
-    text = re.sub(
-        r"\n\\section\*\{Declarations\}.*?(?=\n% \*{60}\n% REFERENCES)",
-        "\n",
-        text,
-        flags=re.S,
-    )
+    text = remove_declarations_block(text)
 
     MANUSCRIPT.write_text(text, encoding="utf-8")
 
