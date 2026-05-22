@@ -419,7 +419,7 @@ robustness_diagnostics <- tibble::tibble(
     "Larger theta indicates less overdispersion in the negative binomial parameterization.",
     "Robustness estimate for the birth-control education association with completed fertility.",
     "Number of observed first-birth events in the Cox estimation sample; this is not the same as the respondent-level analytic sample size.",
-    "Non-significant global test supports the proportional-hazards assumption."
+    "Significant global test suggests possible proportional-hazards assumption violation; Cox timing estimates should be interpreted cautiously."
   )
 )
 
