@@ -117,11 +117,11 @@ jobs:
           (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip NLS-79.tex references.bib Funding-Statement.tex)
 
           test -s "$ZIP_PATH"
-          unzip -l "$ZIP_PATH"
-          unzip -l "$ZIP_PATH" | grep "NLS-79.tex"
-          unzip -l "$ZIP_PATH" | grep "references.bib"
-          unzip -l "$ZIP_PATH" | grep "Funding-Statement.tex"
-          if unzip -l "$ZIP_PATH" | grep -q -E "\.pdf|/"; then
+          zipinfo -1 "$ZIP_PATH"
+          zipinfo -1 "$ZIP_PATH" | grep -x "NLS-79.tex"
+          zipinfo -1 "$ZIP_PATH" | grep -x "references.bib"
+          zipinfo -1 "$ZIP_PATH" | grep -x "Funding-Statement.tex"
+          if zipinfo -1 "$ZIP_PATH" | grep -q -E "\.pdf$|/"; then
             echo "Editor return package failed: LaTeX source ZIP must not contain PDFs or nested folders."
             exit 1
           fi
