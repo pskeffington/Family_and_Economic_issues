@@ -56,7 +56,7 @@ jobs:
         run: |
           python3 scripts/verify_table_values.py
 
-      - name: Build revised blinded manuscript PDF
+      - name: Build blinded manuscript PDF
         working-directory: manuscript
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
@@ -75,26 +75,26 @@ jobs:
         run: |
           set -euo pipefail
 
-          PACKAGE_DIR="output/JFEI-technical-check-return-package"
+          PACKAGE_DIR="output/JFEI-blinded-review-package"
           LETTER_DIR="output/JFEI-response-letter"
-          ZIP_PATH="output/JFEI-technical-check-return-package.zip"
+          ZIP_PATH="output/JFEI-blinded-review-package.zip"
 
           rm -rf output
           mkdir -p "$PACKAGE_DIR" "$LETTER_DIR"
 
-          cp manuscript/NLS-79.pdf "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
-          cp manuscript/NLS-79.tex "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"
+          cp manuscript/NLS-79.pdf "$PACKAGE_DIR/NLS-79.pdf"
+          cp manuscript/NLS-79.tex "$PACKAGE_DIR/NLS-79.tex"
           cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
           cp submission/funding-statement.pdf "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
-          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
+          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/NLS-79.pdf"
           exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
           exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
-          # The revised blinded manuscript itself must contain no declaration or author-identifying material.
-          if grep -n -E "Paul A\. Skeffington|Paul Skeffington|Skeffington|Dartmouth|Statements and Declarations|Author Contributions|Acknowledgements|Competing Interests|Ethics Approval|Consent to Participate|Consent for Publication|Funding" "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"; then
-            echo "Editor return package failed: declaration or identifying material found in revised blinded manuscript."
+          # The blinded manuscript itself must contain no declaration or author-identifying material.
+          if grep -n -E "Paul A\. Skeffington|Paul Skeffington|Skeffington|Dartmouth|Statements and Declarations|Author Contributions|Acknowledgements|Competing Interests|Ethics Approval|Consent to Participate|Consent for Publication|Funding" "$PACKAGE_DIR/NLS-79.tex"; then
+            echo "Editor return package failed: declaration or identifying material found in blinded manuscript."
             exit 1
           fi
 
@@ -104,20 +104,20 @@ jobs:
             exit 1
           fi
 
-          test -s "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
-          test -s "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"
+          test -s "$PACKAGE_DIR/NLS-79.pdf"
+          test -s "$PACKAGE_DIR/NLS-79.tex"
           test -s "$PACKAGE_DIR/references.bib"
           test -s "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
-          (cd output && zip -r "JFEI-technical-check-return-package.zip" "JFEI-technical-check-return-package")
+          (cd output && zip -r "JFEI-blinded-review-package.zip" "JFEI-blinded-review-package")
 
           test -s "$ZIP_PATH"
           unzip -l "$ZIP_PATH"
-          unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Revised-Blinded-Manuscript.pdf"
-          unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Revised-Blinded-Manuscript.tex"
-          unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/references.bib"
-          unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Funding-Statement-Separate-Page.pdf"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.pdf"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.tex"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/references.bib"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/Funding-Statement-Separate-Page.pdf"
           if unzip -l "$ZIP_PATH" | grep -q "Response-to-Technical-Check.pdf"; then
             echo "Editor return package failed: response letter must remain outside the ZIP."
             exit 1
@@ -126,8 +126,8 @@ jobs:
       - name: Upload editor return ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: JFEI-technical-check-return-package
-          path: output/JFEI-technical-check-return-package.zip
+          name: JFEI-blinded-review-package
+          path: output/JFEI-blinded-review-package.zip
           if-no-files-found: error
 
       - name: Upload separate response letter PDF
