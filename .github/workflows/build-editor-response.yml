@@ -66,7 +66,7 @@ jobs:
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
 
-      - name: Build separate funding statement PDF
+      - name: Build funding statement PDF
         working-directory: submission
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error funding-statement.tex
@@ -85,11 +85,11 @@ jobs:
           cp manuscript/NLS-79.pdf "$PACKAGE_DIR/NLS-79.pdf"
           cp manuscript/NLS-79.tex "$PACKAGE_DIR/NLS-79.tex"
           cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
-          cp submission/funding-statement.pdf "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          cp submission/funding-statement.pdf "$PACKAGE_DIR/Funding-Statement.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           exiftool -all:all= -overwrite_original "$PACKAGE_DIR/NLS-79.pdf"
-          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Funding-Statement.pdf"
           exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           # The blinded manuscript itself must contain no declaration or author-identifying material.
@@ -98,16 +98,16 @@ jobs:
             exit 1
           fi
 
-          # The separate funding page is the only location in the ZIP where funding text is allowed.
+          # The funding statement is provided only as a separate PDF in the ZIP.
           if ! grep -q "No funding was received to assist with the preparation of this manuscript" submission/funding-statement.tex; then
-            echo "Editor return package failed: separate funding statement is missing expected text."
+            echo "Editor return package failed: funding statement is missing expected text."
             exit 1
           fi
 
           test -s "$PACKAGE_DIR/NLS-79.pdf"
           test -s "$PACKAGE_DIR/NLS-79.tex"
           test -s "$PACKAGE_DIR/references.bib"
-          test -s "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          test -s "$PACKAGE_DIR/Funding-Statement.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           (cd output && zip -r "JFEI-blinded-review-package.zip" "JFEI-blinded-review-package")
@@ -117,7 +117,7 @@ jobs:
           unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.pdf"
           unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.tex"
           unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/references.bib"
-          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/Funding-Statement-Separate-Page.pdf"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/Funding-Statement.pdf"
           if unzip -l "$ZIP_PATH" | grep -q "Response-to-Technical-Check.pdf"; then
             echo "Editor return package failed: response letter must remain outside the ZIP."
             exit 1
