@@ -29,7 +29,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install TeX Live packages
+      - name: Install build and packaging dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -39,7 +39,10 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-bibtex-extra \
-            biber
+            biber \
+            libimage-exiftool-perl \
+            zip \
+            unzip
 
       - name: Apply JFEI pre-submission cleanup
         run: |
@@ -50,18 +53,51 @@ jobs:
         run: |
           python3 scripts/verify_table_values.py
 
-      - name: Build manuscript
+      - name: Build blinded manuscript PDF
         working-directory: manuscript
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
 
-      - name: Prepare compiled output
+      - name: Prepare editor-safe blinded review package
         run: |
-          mkdir -p output
-          cp manuscript/NLS-79.pdf output/NLS-79.pdf
+          set -euo pipefail
 
-      - name: Upload compiled PDF artifact
+          PACKAGE_DIR="output/JFEI-blinded-review-package"
+          ZIP_PATH="output/JFEI-blinded-review-package.zip"
+
+          rm -rf output
+          mkdir -p "$PACKAGE_DIR"
+
+          cp manuscript/NLS-79.pdf "$PACKAGE_DIR/NLS-79.pdf"
+          cp manuscript/NLS-79.tex "$PACKAGE_DIR/NLS-79.tex"
+          cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
+
+          # Remove common PDF metadata fields before packaging.
+          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/NLS-79.pdf"
+
+          # Guard against accidental author/declaration material in the package.
+          if grep -R -n -E "Paul A\. Skeffington|Paul Skeffington|Skeffington|Dartmouth|Statements and Declarations|Author Contributions|Acknowledgements|Competing Interests|Ethics Approval|Consent to Participate|Consent for Publication|Funding" "$PACKAGE_DIR"; then
+            echo "Editor-safe package check failed: identifying or declarations material found."
+            exit 1
+          fi
+
+          # Guard against forbidden package members.
+          if find "$PACKAGE_DIR" -type f | grep -E "title|declaration|author|cover|submission"; then
+            echo "Editor-safe package check failed: forbidden file name found."
+            exit 1
+          fi
+
+          (cd output && zip -r "JFEI-blinded-review-package.zip" "JFEI-blinded-review-package")
+
+          test -s "$ZIP_PATH"
+          unzip -l "$ZIP_PATH"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.pdf"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/NLS-79.tex"
+          unzip -l "$ZIP_PATH" | grep "JFEI-blinded-review-package/references.bib"
+
+      - name: Upload editor-safe blinded review package
         uses: actions/upload-artifact@v4
         with:
-          name: NLS-79-compiled-pdf
-          path: output/NLS-79.pdf
+          name: JFEI-blinded-review-package
+          path: output/JFEI-blinded-review-package.zip
+          if-no-files-found: error
