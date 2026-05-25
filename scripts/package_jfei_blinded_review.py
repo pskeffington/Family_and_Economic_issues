@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build a journal-ready blinded review package for JFEI submission."""
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -34,6 +35,8 @@ FORBIDDEN = [
     "Statements and Declarations",
 ]
 
+EMAIL_PATTERN = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
 
 def fail(message: str) -> None:
     print(f"ERROR: {message}", file=sys.stderr)
@@ -52,8 +55,8 @@ def audit_text_file(path: Path, errors: list[str]) -> None:
     for term in FORBIDDEN:
         if term in text:
             errors.append(f"{path.relative_to(ROOT)} contains forbidden term: {term}")
-    if "@" in text:
-        errors.append(f"{path.relative_to(ROOT)} contains an at-sign; inspect for email addresses")
+    if EMAIL_PATTERN.search(text):
+        errors.append(f"{path.relative_to(ROOT)} contains an email-like string")
 
 
 def main() -> int:
