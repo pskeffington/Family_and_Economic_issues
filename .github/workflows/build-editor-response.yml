@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - "submission/editor-response-technical-check.tex"
+      - "submission/funding-statement.tex"
       - ".github/workflows/build-editor-response.yml"
   pull_request:
     branches: [main]
     paths:
       - "submission/editor-response-technical-check.tex"
+      - "submission/funding-statement.tex"
       - ".github/workflows/build-editor-response.yml"
   workflow_dispatch:
 
@@ -37,6 +39,11 @@ jobs:
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
 
+      - name: Build separate funding statement PDF
+        working-directory: submission
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error funding-statement.tex
+
       - name: Prepare editor response artifact
         run: |
           set -euo pipefail
@@ -44,10 +51,14 @@ jobs:
           mkdir -p output/editor-response-technical-check
           cp submission/editor-response-technical-check.pdf output/editor-response-technical-check/Response-to-Technical-Check.pdf
           cp submission/editor-response-technical-check.tex output/editor-response-technical-check/editor-response-technical-check.tex
+          cp submission/funding-statement.pdf output/editor-response-technical-check/Funding-Statement-Separate-Page.pdf
+          cp submission/funding-statement.tex output/editor-response-technical-check/funding-statement.tex
 
           exiftool -all:all= -overwrite_original output/editor-response-technical-check/Response-to-Technical-Check.pdf
+          exiftool -all:all= -overwrite_original output/editor-response-technical-check/Funding-Statement-Separate-Page.pdf
 
           test -s output/editor-response-technical-check/Response-to-Technical-Check.pdf
+          test -s output/editor-response-technical-check/Funding-Statement-Separate-Page.pdf
 
       - name: Upload editor response PDF
         uses: actions/upload-artifact@v4
