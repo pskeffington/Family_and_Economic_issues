@@ -1,0 +1,57 @@
+name: Build Editor Response PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "submission/editor-response-technical-check.tex"
+      - ".github/workflows/build-editor-response.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "submission/editor-response-technical-check.tex"
+      - ".github/workflows/build-editor-response.yml"
+  workflow_dispatch:
+
+jobs:
+  build-editor-response:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install TeX Live packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            libimage-exiftool-perl
+
+      - name: Build editor response PDF
+        working-directory: submission
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
+
+      - name: Prepare editor response artifact
+        run: |
+          set -euo pipefail
+
+          mkdir -p output/editor-response-technical-check
+          cp submission/editor-response-technical-check.pdf output/editor-response-technical-check/Response-to-Technical-Check.pdf
+          cp submission/editor-response-technical-check.tex output/editor-response-technical-check/editor-response-technical-check.tex
+
+          exiftool -all:all= -overwrite_original output/editor-response-technical-check/Response-to-Technical-Check.pdf
+
+          test -s output/editor-response-technical-check/Response-to-Technical-Check.pdf
+
+      - name: Upload editor response PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: JFEI-editor-response-technical-check
+          path: output/editor-response-technical-check
+          if-no-files-found: error
