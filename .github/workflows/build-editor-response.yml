@@ -71,25 +71,26 @@ jobs:
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error funding-statement.tex
 
-      - name: Prepare single editor-ready return ZIP
+      - name: Prepare editor return ZIP and separate response letter
         run: |
           set -euo pipefail
 
           PACKAGE_DIR="output/JFEI-technical-check-return-package"
+          LETTER_DIR="output/JFEI-response-letter"
           ZIP_PATH="output/JFEI-technical-check-return-package.zip"
 
           rm -rf output
-          mkdir -p "$PACKAGE_DIR"
+          mkdir -p "$PACKAGE_DIR" "$LETTER_DIR"
 
           cp manuscript/NLS-79.pdf "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
           cp manuscript/NLS-79.tex "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"
           cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
-          cp submission/editor-response-technical-check.pdf "$PACKAGE_DIR/Response-to-Technical-Check.pdf"
           cp submission/funding-statement.pdf "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
-          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Response-to-Technical-Check.pdf"
           exiftool -all:all= -overwrite_original "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           # The revised blinded manuscript itself must contain no declaration or author-identifying material.
           if grep -n -E "Paul A\. Skeffington|Paul Skeffington|Skeffington|Dartmouth|Statements and Declarations|Author Contributions|Acknowledgements|Competing Interests|Ethics Approval|Consent to Participate|Consent for Publication|Funding" "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"; then
@@ -97,7 +98,7 @@ jobs:
             exit 1
           fi
 
-          # The separate funding page is the only location where funding text is allowed.
+          # The separate funding page is the only location in the ZIP where funding text is allowed.
           if ! grep -q "No funding was received to assist with the preparation of this manuscript" submission/funding-statement.tex; then
             echo "Editor return package failed: separate funding statement is missing expected text."
             exit 1
@@ -106,8 +107,8 @@ jobs:
           test -s "$PACKAGE_DIR/Revised-Blinded-Manuscript.pdf"
           test -s "$PACKAGE_DIR/Revised-Blinded-Manuscript.tex"
           test -s "$PACKAGE_DIR/references.bib"
-          test -s "$PACKAGE_DIR/Response-to-Technical-Check.pdf"
           test -s "$PACKAGE_DIR/Funding-Statement-Separate-Page.pdf"
+          test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           (cd output && zip -r "JFEI-technical-check-return-package.zip" "JFEI-technical-check-return-package")
 
@@ -116,12 +117,22 @@ jobs:
           unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Revised-Blinded-Manuscript.pdf"
           unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Revised-Blinded-Manuscript.tex"
           unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/references.bib"
-          unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Response-to-Technical-Check.pdf"
           unzip -l "$ZIP_PATH" | grep "JFEI-technical-check-return-package/Funding-Statement-Separate-Page.pdf"
+          if unzip -l "$ZIP_PATH" | grep -q "Response-to-Technical-Check.pdf"; then
+            echo "Editor return package failed: response letter must remain outside the ZIP."
+            exit 1
+          fi
 
-      - name: Upload single editor-ready return package
+      - name: Upload editor return ZIP
         uses: actions/upload-artifact@v4
         with:
           name: JFEI-technical-check-return-package
           path: output/JFEI-technical-check-return-package.zip
+          if-no-files-found: error
+
+      - name: Upload separate response letter PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: JFEI-response-letter
+          path: output/JFEI-response-letter/Response-to-Technical-Check.pdf
           if-no-files-found: error
