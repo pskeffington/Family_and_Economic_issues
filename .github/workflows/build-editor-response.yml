@@ -86,6 +86,7 @@ jobs:
 
           cp manuscript/NLS-79.tex "$SOURCE_DIR/NLS-79.tex"
           cp manuscript/references.bib "$SOURCE_DIR/references.bib"
+          cp submission/funding-statement.tex "$SOURCE_DIR/Funding-Statement.tex"
           cp manuscript/NLS-79.pdf "$PDF_DIR/NLS-79.pdf"
           cp submission/funding-statement.pdf "$FUNDING_DIR/Funding-Statement.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
@@ -100,24 +101,26 @@ jobs:
             exit 1
           fi
 
-          if ! grep -q "No funding was received to assist with the preparation of this manuscript" submission/funding-statement.tex; then
+          if ! grep -q "No funding was received to assist with the preparation of this manuscript" "$SOURCE_DIR/Funding-Statement.tex"; then
             echo "Editor return package failed: funding statement is missing expected text."
             exit 1
           fi
 
           test -s "$SOURCE_DIR/NLS-79.tex"
           test -s "$SOURCE_DIR/references.bib"
+          test -s "$SOURCE_DIR/Funding-Statement.tex"
           test -s "$PDF_DIR/NLS-79.pdf"
           test -s "$FUNDING_DIR/Funding-Statement.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           # Upload this ZIP as the LaTeX manuscript file. Keep files at ZIP root for Springer conversion.
-          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip NLS-79.tex references.bib)
+          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip NLS-79.tex references.bib Funding-Statement.tex)
 
           test -s "$ZIP_PATH"
           unzip -l "$ZIP_PATH"
           unzip -l "$ZIP_PATH" | grep "NLS-79.tex"
           unzip -l "$ZIP_PATH" | grep "references.bib"
+          unzip -l "$ZIP_PATH" | grep "Funding-Statement.tex"
           if unzip -l "$ZIP_PATH" | grep -q -E "\.pdf|/"; then
             echo "Editor return package failed: LaTeX source ZIP must not contain PDFs or nested folders."
             exit 1
