@@ -66,33 +66,25 @@ jobs:
         run: |
           latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
 
-      - name: Build funding statement PDF
-        working-directory: submission
-        run: |
-          latexmk -pdf -interaction=nonstopmode -halt-on-error funding-statement.tex
-
       - name: Prepare LaTeX-only manuscript ZIP and separate PDFs
         run: |
           set -euo pipefail
 
           SOURCE_DIR="output/JFEI-blinded-review-package"
           PDF_DIR="output/JFEI-manuscript-pdf"
-          FUNDING_DIR="output/JFEI-funding-statement"
           LETTER_DIR="output/JFEI-response-letter"
           ZIP_PATH="output/JFEI-blinded-review-package.zip"
 
           rm -rf output
-          mkdir -p "$SOURCE_DIR" "$PDF_DIR" "$FUNDING_DIR" "$LETTER_DIR"
+          mkdir -p "$SOURCE_DIR" "$PDF_DIR" "$LETTER_DIR"
 
           cp manuscript/NLS-79.tex "$SOURCE_DIR/NLS-79.tex"
           cp manuscript/references.bib "$SOURCE_DIR/references.bib"
           cp submission/funding-statement.tex "$SOURCE_DIR/Funding-Statement.tex"
           cp manuscript/NLS-79.pdf "$PDF_DIR/NLS-79.pdf"
-          cp submission/funding-statement.pdf "$FUNDING_DIR/Funding-Statement.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           exiftool -all:all= -overwrite_original "$PDF_DIR/NLS-79.pdf"
-          exiftool -all:all= -overwrite_original "$FUNDING_DIR/Funding-Statement.pdf"
           exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           # The blinded manuscript source must contain no declaration or author-identifying material.
@@ -110,7 +102,6 @@ jobs:
           test -s "$SOURCE_DIR/references.bib"
           test -s "$SOURCE_DIR/Funding-Statement.tex"
           test -s "$PDF_DIR/NLS-79.pdf"
-          test -s "$FUNDING_DIR/Funding-Statement.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
           # Upload this ZIP as the LaTeX manuscript file. Keep files at ZIP root for Springer conversion.
@@ -138,13 +129,6 @@ jobs:
         with:
           name: JFEI-manuscript-pdf
           path: output/JFEI-manuscript-pdf/NLS-79.pdf
-          if-no-files-found: error
-
-      - name: Upload funding statement PDF separately
-        uses: actions/upload-artifact@v4
-        with:
-          name: JFEI-funding-statement
-          path: output/JFEI-funding-statement/Funding-Statement.pdf
           if-no-files-found: error
 
       - name: Upload response letter PDF separately
