@@ -1,0 +1,100 @@
+name: Build Springer Template Manuscript
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "manuscript/NLS-79.tex"
+      - "manuscript/references.bib"
+      - "scripts/build_springer_template_manuscript.py"
+      - "scripts/fetch_springer_template.sh"
+      - ".github/workflows/build-springer-template-manuscript.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "manuscript/NLS-79.tex"
+      - "manuscript/references.bib"
+      - "scripts/build_springer_template_manuscript.py"
+      - "scripts/fetch_springer_template.sh"
+      - ".github/workflows/build-springer-template-manuscript.yml"
+  workflow_dispatch:
+
+jobs:
+  build-springer-template-manuscript:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            curl \
+            unzip \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-bibtex-extra \
+            biber \
+            libimage-exiftool-perl \
+            zip
+
+      - name: Fetch official Springer Nature LaTeX template package
+        run: |
+          bash scripts/fetch_springer_template.sh
+
+      - name: Stage Springer template class and bibliography files
+        run: |
+          set -euo pipefail
+          find templates/springer-nature-official/template-package -type f \( -name "sn-jnl.cls" -o -name "sn-*.bst" -o -name "sn-*.bbx" -o -name "sn-*.cbx" \) -exec cp {} manuscript/ \;
+          test -s manuscript/sn-jnl.cls
+          ls -la manuscript/sn-jnl.cls manuscript/sn-*.bst
+
+      - name: Generate Springer template-aligned blinded source
+        run: |
+          python3 scripts/build_springer_template_manuscript.py
+          test -s manuscript/NLS-79-springer-template.tex
+
+      - name: Guard against declarations and identifying material
+        run: |
+          set -euo pipefail
+          if grep -n -E "Paul A\. Skeffington|Paul Skeffington|Skeffington|Dartmouth|Statements and Declarations|Author Contributions|Acknowledgements|Competing Interests|Ethics Approval|Consent to Participate|Consent for Publication|Funding" manuscript/NLS-79-springer-template.tex; then
+            echo "Springer template manuscript check failed: identifying or declaration material found."
+            exit 1
+          fi
+
+      - name: Build Springer template-aligned blinded PDF
+        working-directory: manuscript
+        run: |
+          latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79-springer-template.tex
+
+      - name: Prepare Springer template-aligned artifact
+        run: |
+          set -euo pipefail
+          PACKAGE_DIR="output/JFEI-springer-template-blinded-manuscript"
+          ZIP_PATH="output/JFEI-springer-template-blinded-manuscript.zip"
+          rm -rf output
+          mkdir -p "$PACKAGE_DIR"
+          cp manuscript/NLS-79-springer-template.pdf "$PACKAGE_DIR/NLS-79-springer-template.pdf"
+          cp manuscript/NLS-79-springer-template.tex "$PACKAGE_DIR/NLS-79-springer-template.tex"
+          cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
+          cp manuscript/sn-jnl.cls "$PACKAGE_DIR/sn-jnl.cls"
+          cp manuscript/sn-*.bst "$PACKAGE_DIR/"
+          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/NLS-79-springer-template.pdf"
+          test -s "$PACKAGE_DIR/NLS-79-springer-template.pdf"
+          test -s "$PACKAGE_DIR/NLS-79-springer-template.tex"
+          test -s "$PACKAGE_DIR/references.bib"
+          (cd output && zip -r "JFEI-springer-template-blinded-manuscript.zip" "JFEI-springer-template-blinded-manuscript")
+          test -s "$ZIP_PATH"
+          unzip -l "$ZIP_PATH"
+
+      - name: Upload Springer template-aligned blinded manuscript
+        uses: actions/upload-artifact@v4
+        with:
+          name: JFEI-springer-template-blinded-manuscript
+          path: output/JFEI-springer-template-blinded-manuscript.zip
+          if-no-files-found: error
