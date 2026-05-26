@@ -2,7 +2,7 @@
 
 **Status:** JFEI pre-submission cleanup / blinded-package review.  
 **Maintainer:** Paul Skeffington, MS, MPH  
-**Last documentation refresh:** 2026-05-25
+**Last documentation refresh:** 2026-05-26
 
 LaTeX manuscript repository for research on family formation, financial preparedness, birth-control education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
 
@@ -11,6 +11,10 @@ LaTeX manuscript repository for research on family formation, financial prepared
 **Working title:** *Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79*
 
 This repository is in pre-submission form. It is organized for reproducible drafting, contributor review, citation verification, model-output audit, and automated LaTeX compilation. The manuscript should not be treated as a final journal submission package until the pre-submission checklist below is complete.
+
+## Current update — 2026-05-26
+
+The repository remains in JFEI pre-submission cleanup and blinded-package review. The immediate documentation priority is to keep `REPRODUCIBILITY.md`, `CITATION.cff`, `references.bib`, generated tables, and the blinded manuscript synchronized while preserving the separation between blinded review files and author-identifying submission materials.
 
 ## Repository structure
 
