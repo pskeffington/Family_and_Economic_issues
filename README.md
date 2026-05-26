@@ -1,6 +1,8 @@
 # Family and Economic Issues
 
-**Status:** JFEI pre-submission cleanup / blinded-package review.
+**Status:** JFEI pre-submission cleanup / blinded-package review.  
+**Maintainer:** Paul Skeffington, MS, MPH  
+**Last documentation refresh:** 2026-05-25
 
 LaTeX manuscript repository for research on family formation, financial preparedness, birth-control education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
 
@@ -138,6 +140,18 @@ submission/submission_checklist.md
 ```
 
 Generated upload bundles or exported Word/PDF files may be created locally under `submission/`, but the source-of-truth materials are the editable manuscript and submission-support files.
+
+## Documentation and review standards
+
+This repository should follow the science-repository pattern in `Best-Practices-Git`: explicit status language, raw-data exclusion, reproducible execution notes, source-verification records, and manuscript-claim traceability.
+
+Current documentation priorities:
+
+- Keep `REPRODUCIBILITY.md` aligned with the active script and local data-directory expectations.
+- Keep `CITATION.cff`, `references.bib`, and manuscript citations synchronized.
+- Keep generated tables traceable to the analysis script and manuscript text.
+- Maintain a clear boundary between blinded manuscript files and author-identifying submission materials.
+- Preserve NLSY79 public-use data restrictions by excluding raw extracts from Git.
 
 ## Pre-submission checklist
 
