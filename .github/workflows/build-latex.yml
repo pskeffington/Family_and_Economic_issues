@@ -62,30 +62,30 @@ jobs:
           awk 'found || /^\\documentclass/ { found=1; print }' manuscript/NLS-79.tex \
             | grep -v '^\\input{glyphtounicode}' \
             | grep -v '^\\pdfgentounicode=1' \
-            > "$SOURCE_DIR/main.tex"
+            > "$SOURCE_DIR/manuscript.tex"
           cp manuscript/references.bib "$SOURCE_DIR/references.bib"
-          cp "$SOURCE_DIR/main.tex" "$CHECK_DIR/main.tex"
+          cp "$SOURCE_DIR/manuscript.tex" "$CHECK_DIR/manuscript.tex"
           cp "$SOURCE_DIR/references.bib" "$CHECK_DIR/references.bib"
 
-          test -f "$SOURCE_DIR/main.tex"
+          test -f "$SOURCE_DIR/manuscript.tex"
           test -f "$SOURCE_DIR/references.bib"
-          test "$(head -n 1 "$SOURCE_DIR/main.tex")" = "\\documentclass[12pt]{article}"
-          grep -q '\\begin{document}' "$SOURCE_DIR/main.tex"
-          if grep -q '^\\input{' "$SOURCE_DIR/main.tex"; then
-            echo "Packaged main.tex contains a pre-document input call."
+          test "$(head -n 1 "$SOURCE_DIR/manuscript.tex")" = "\\documentclass[12pt]{article}"
+          grep -q '\\begin{document}' "$SOURCE_DIR/manuscript.tex"
+          if grep -q '^\\input{' "$SOURCE_DIR/manuscript.tex"; then
+            echo "Packaged manuscript.tex contains a pre-document input call."
             exit 1
           fi
 
-          (cd "$CHECK_DIR" && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
+          (cd "$CHECK_DIR" && latexmk -pdf -interaction=nonstopmode -halt-on-error manuscript.tex)
 
           file_count=$(find "$SOURCE_DIR" -type f | wc -l)
           test "$file_count" -eq 2
 
-          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip main.tex references.bib)
+          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib)
 
           test -s "$ZIP_PATH"
           zipinfo -1 "$ZIP_PATH"
-          zipinfo -1 "$ZIP_PATH" | grep -x "main.tex"
+          zipinfo -1 "$ZIP_PATH" | grep -x "manuscript.tex"
           zipinfo -1 "$ZIP_PATH" | grep -x "references.bib"
           test "$(zipinfo -1 "$ZIP_PATH" | wc -l)" -eq 2
           if zipinfo -1 "$ZIP_PATH" | grep -E '\.pdf$|\.aux$|\.log$|\.out$|/|Funding|funding|Declaration|declaration|Title|title|Cover|cover'; then
@@ -100,4 +100,4 @@ jobs:
           path: output/JFEI-blinded-review-package.zip
           if-no-files-found: error
 
-# Springer/Snapp intake package contract: root-level main.tex and references.bib only.
+# Springer/Snapp intake package contract: root-level manuscript.tex and references.bib only.
