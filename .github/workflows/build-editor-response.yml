@@ -47,39 +47,38 @@ jobs:
             unzip
 
       - name: Apply manuscript cleanup requested by technical check
-        run: |
-          python3 scripts/jfei_pre_submission_cleanup.py
+        run: python3 scripts/jfei_pre_submission_cleanup.py
 
       - name: Verify manuscript values and blinding
-        run: |
-          python3 scripts/verify_table_values.py
+        run: python3 scripts/verify_table_values.py
 
       - name: Build blinded manuscript PDF for local validation only
         working-directory: manuscript
-        run: |
-          latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
 
       - name: Build formatted response letter PDF
         working-directory: submission
-        run: |
-          latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error editor-response-technical-check.tex
 
-      - name: Prepare two-file LaTeX manuscript ZIP and separate PDFs
+      - name: Prepare and validate two-file LaTeX manuscript ZIP
         run: |
           set -euo pipefail
 
           SOURCE_DIR="output/JFEI-blinded-review-package"
+          CHECK_DIR="output/package-compile-check"
           PDF_DIR="output/JFEI-manuscript-pdf"
           LETTER_DIR="output/JFEI-response-letter"
           ZIP_PATH="output/JFEI-blinded-review-package.zip"
 
           rm -rf output
-          mkdir -p "$SOURCE_DIR" "$PDF_DIR" "$LETTER_DIR"
+          mkdir -p "$SOURCE_DIR" "$CHECK_DIR" "$PDF_DIR" "$LETTER_DIR"
 
           cp manuscript/NLS-79.tex "$SOURCE_DIR/manuscript.tex"
           cp manuscript/references.bib "$SOURCE_DIR/references.bib"
           cp manuscript/NLS-79.pdf "$PDF_DIR/manuscript.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
+          cp "$SOURCE_DIR/manuscript.tex" "$CHECK_DIR/manuscript.tex"
+          cp "$SOURCE_DIR/references.bib" "$CHECK_DIR/references.bib"
 
           exiftool -all:all= -overwrite_original "$PDF_DIR/manuscript.pdf"
           exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
@@ -88,6 +87,12 @@ jobs:
           test -s "$SOURCE_DIR/references.bib"
           test -s "$PDF_DIR/manuscript.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
+          grep -q '\\documentclass' "$SOURCE_DIR/manuscript.tex"
+
+          (cd "$CHECK_DIR" && latexmk -pdf -interaction=nonstopmode -halt-on-error manuscript.tex)
+
+          file_count=$(find "$SOURCE_DIR" -type f | wc -l)
+          test "$file_count" -eq 2
 
           (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib)
 
@@ -95,8 +100,11 @@ jobs:
           zipinfo -1 "$ZIP_PATH"
           zipinfo -1 "$ZIP_PATH" | grep -x "manuscript.tex"
           zipinfo -1 "$ZIP_PATH" | grep -x "references.bib"
-          file_count=$(zipinfo -1 "$ZIP_PATH" | wc -l)
-          test "$file_count" -eq 2
+          test "$(zipinfo -1 "$ZIP_PATH" | wc -l)" -eq 2
+          if zipinfo -1 "$ZIP_PATH" | grep -E '\.pdf$|\.aux$|\.log$|\.out$|/|Funding|funding|Declaration|declaration|Title|title|Cover|cover'; then
+            echo "Reviewer ZIP contains a forbidden member."
+            exit 1
+          fi
 
       - name: Upload LaTeX-only manuscript ZIP
         uses: actions/upload-artifact@v4
