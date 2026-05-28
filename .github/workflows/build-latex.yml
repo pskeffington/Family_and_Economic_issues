@@ -25,36 +25,65 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install LaTeX and zip tools
-        run: sudo apt-get update && sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-bibtex-extra biber zip unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-bibtex-extra \
+            biber \
+            zip \
+            unzip
 
-      - name: Clean manuscript source
+      - name: Clean manuscript source for double-anonymous review
         run: python3 scripts/jfei_pre_submission_cleanup.py
 
-      - name: Verify manuscript values
+      - name: Verify manuscript values and blinding
         run: python3 scripts/verify_table_values.py
 
       - name: Compile manuscript for validation
         working-directory: manuscript
         run: latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
 
-      - name: Package root-level LaTeX source for Springer intake
+      - name: Package and validate root-level LaTeX source
         run: |
+          set -euo pipefail
+
+          SOURCE_DIR="output/JFEI-blinded-review-package"
+          CHECK_DIR="output/package-compile-check"
+          ZIP_PATH="output/JFEI-blinded-review-package.zip"
+
           rm -rf output
-          mkdir -p output/JFEI-blinded-review-package
-          cp manuscript/NLS-79.tex output/JFEI-blinded-review-package/manuscript.tex
-          cp manuscript/references.bib output/JFEI-blinded-review-package/references.bib
-          file_count=$(find output/JFEI-blinded-review-package -type f | wc -l)
+          mkdir -p "$SOURCE_DIR" "$CHECK_DIR"
+
+          cp manuscript/NLS-79.tex "$SOURCE_DIR/manuscript.tex"
+          cp manuscript/references.bib "$SOURCE_DIR/references.bib"
+          cp "$SOURCE_DIR/manuscript.tex" "$CHECK_DIR/manuscript.tex"
+          cp "$SOURCE_DIR/references.bib" "$CHECK_DIR/references.bib"
+
+          test -f "$SOURCE_DIR/manuscript.tex"
+          test -f "$SOURCE_DIR/references.bib"
+          grep -q '\\documentclass' "$SOURCE_DIR/manuscript.tex"
+
+          (cd "$CHECK_DIR" && latexmk -pdf -interaction=nonstopmode -halt-on-error manuscript.tex)
+
+          file_count=$(find "$SOURCE_DIR" -type f | wc -l)
           test "$file_count" -eq 2
-          test -f output/JFEI-blinded-review-package/manuscript.tex
-          test -f output/JFEI-blinded-review-package/references.bib
-          grep -q '\\documentclass' output/JFEI-blinded-review-package/manuscript.tex
-          cd output/JFEI-blinded-review-package
-          zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib
-          cd ..
-          zipinfo -1 JFEI-blinded-review-package.zip
-          zipinfo -1 JFEI-blinded-review-package.zip | grep -x "manuscript.tex"
-          zipinfo -1 JFEI-blinded-review-package.zip | grep -x "references.bib"
-          test "$(zipinfo -1 JFEI-blinded-review-package.zip | wc -l)" -eq 2
+
+          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib)
+
+          test -s "$ZIP_PATH"
+          zipinfo -1 "$ZIP_PATH"
+          zipinfo -1 "$ZIP_PATH" | grep -x "manuscript.tex"
+          zipinfo -1 "$ZIP_PATH" | grep -x "references.bib"
+          test "$(zipinfo -1 "$ZIP_PATH" | wc -l)" -eq 2
+          if zipinfo -1 "$ZIP_PATH" | grep -E '\.pdf$|\.aux$|\.log$|\.out$|/|Funding|funding|Declaration|declaration|Title|title|Cover|cover'; then
+            echo "Reviewer ZIP contains a forbidden member."
+            exit 1
+          fi
 
       - name: Upload editor source package
         uses: actions/upload-artifact@v4
