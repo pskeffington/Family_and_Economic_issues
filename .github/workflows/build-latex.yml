@@ -57,3 +57,5 @@ jobs:
           name: JFEI-manuscript-source-package
           path: output/JFEI-manuscript-source-package.zip
           if-no-files-found: error
+
+# Reviewer package contract: exactly NLS79-manuscript.tex and references.bib.
