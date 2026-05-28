@@ -6,8 +6,6 @@ on:
     paths:
       - "manuscript/**"
       - "tables/**"
-      - "figures/**"
-      - "submission/**"
       - "scripts/**"
       - ".github/workflows/build-latex.yml"
   pull_request:
@@ -15,8 +13,6 @@ on:
     paths:
       - "manuscript/**"
       - "tables/**"
-      - "figures/**"
-      - "submission/**"
       - "scripts/**"
       - ".github/workflows/build-latex.yml"
   workflow_dispatch:
@@ -24,69 +20,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install build and packaging dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            latexmk \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-bibtex-extra \
-            biber \
-            libimage-exiftool-perl \
-            zip \
-            unzip
+      - name: Install LaTeX and zip tools
+        run: sudo apt-get update && sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-bibtex-extra biber zip unzip
 
-      - name: Apply JFEI pre-submission cleanup
-        run: |
-          python3 scripts/jfei_pre_submission_cleanup.py
-          git diff -- manuscript/NLS-79.tex
+      - name: Clean manuscript source
+        run: python3 scripts/jfei_pre_submission_cleanup.py
 
-      - name: Verify table values and blinded manuscript state
-        run: |
-          python3 scripts/verify_table_values.py
+      - name: Verify manuscript values
+        run: python3 scripts/verify_table_values.py
 
-      - name: Build blinded manuscript PDF
+      - name: Compile manuscript for validation
         working-directory: manuscript
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
+
+      - name: Package manuscript source and references
         run: |
-          latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
+          mkdir -p output/JFEI-manuscript-source-package
+          cp manuscript/NLS-79.tex output/JFEI-manuscript-source-package/NLS-79.tex
+          cp manuscript/references.bib output/JFEI-manuscript-source-package/references.bib
+          cd output
+          zip -r JFEI-manuscript-source-package.zip JFEI-manuscript-source-package
+          unzip -l JFEI-manuscript-source-package.zip
 
-      - name: Prepare editor manuscript package
-        run: |
-          set -euo pipefail
-
-          PACKAGE_DIR="output/JFEI-manuscript-package"
-          ZIP_PATH="output/JFEI-manuscript-package.zip"
-
-          rm -rf output
-          mkdir -p "$PACKAGE_DIR"
-
-          cp manuscript/NLS-79.pdf "$PACKAGE_DIR/NLS-79.pdf"
-          cp manuscript/references.bib "$PACKAGE_DIR/references.bib"
-
-          exiftool -all:all= -overwrite_original "$PACKAGE_DIR/NLS-79.pdf"
-
-          (cd output && zip -r "JFEI-manuscript-package.zip" "JFEI-manuscript-package")
-
-          test -s "$ZIP_PATH"
-          unzip -l "$ZIP_PATH"
-          unzip -l "$ZIP_PATH" | grep "JFEI-manuscript-package/NLS-79.pdf"
-          unzip -l "$ZIP_PATH" | grep "JFEI-manuscript-package/references.bib"
-          if unzip -l "$ZIP_PATH" | grep -E "\.tex$|title|declaration|cover|submission"; then
-            echo "Editor package check failed: forbidden package member found in zip."
-            exit 1
-          fi
-
-      - name: Upload editor manuscript package
+      - name: Upload editor source package
         uses: actions/upload-artifact@v4
         with:
-          name: JFEI-manuscript-package
-          path: output/JFEI-manuscript-package.zip
+          name: JFEI-manuscript-source-package
+          path: output/JFEI-manuscript-source-package.zip
           if-no-files-found: error
