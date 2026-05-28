@@ -76,7 +76,7 @@ jobs:
           rm -rf output
           mkdir -p "$SOURCE_DIR" "$PDF_DIR" "$LETTER_DIR"
 
-          cp manuscript/NLS-79.tex "$SOURCE_DIR/NLS79-manuscript.tex"
+          cp manuscript/NLS-79.tex "$SOURCE_DIR/manuscript.tex"
           cp manuscript/references.bib "$SOURCE_DIR/references.bib"
           cp manuscript/NLS-79.pdf "$PDF_DIR/manuscript.pdf"
           cp submission/editor-response-technical-check.pdf "$LETTER_DIR/Response-to-Technical-Check.pdf"
@@ -84,16 +84,16 @@ jobs:
           exiftool -all:all= -overwrite_original "$PDF_DIR/manuscript.pdf"
           exiftool -all:all= -overwrite_original "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
-          test -s "$SOURCE_DIR/NLS79-manuscript.tex"
+          test -s "$SOURCE_DIR/manuscript.tex"
           test -s "$SOURCE_DIR/references.bib"
           test -s "$PDF_DIR/manuscript.pdf"
           test -s "$LETTER_DIR/Response-to-Technical-Check.pdf"
 
-          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip NLS79-manuscript.tex references.bib)
+          (cd "$SOURCE_DIR" && zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib)
 
           test -s "$ZIP_PATH"
           zipinfo -1 "$ZIP_PATH"
-          zipinfo -1 "$ZIP_PATH" | grep -x "NLS79-manuscript.tex"
+          zipinfo -1 "$ZIP_PATH" | grep -x "manuscript.tex"
           zipinfo -1 "$ZIP_PATH" | grep -x "references.bib"
           file_count=$(zipinfo -1 "$ZIP_PATH" | wc -l)
           test "$file_count" -eq 2
