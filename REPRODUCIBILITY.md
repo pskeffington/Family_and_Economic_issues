@@ -2,6 +2,23 @@
 
 This repository supports transparent manuscript drafting and audit for the NLSY79 family formation analysis.
 
+## Canonical review paths
+
+Use these UTF-8 text paths as the source of truth when repository-wide code search is incomplete:
+
+```text
+README.md
+REPRODUCIBILITY.md
+ROADMAP.md
+CHANGELOG.md
+manuscript/NLS-79.tex
+manuscript/references.bib
+analysis/NLS79_manuscript_analysis_public_git.R
+.github/workflows/build-latex.yml
+```
+
+Reviewer-shared manuscript evidence should remain reviewable through these text files plus the GitHub Actions package described below. Generated PDFs and ZIP files are build artifacts, not the only copy of manuscript-critical evidence.
+
 ## Analysis workflow
 
 Run the analysis from the repository root:
@@ -105,6 +122,22 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error NLS-79.tex
 ```
 
 The workflow runs from the `manuscript/` directory and uses `manuscript/references.bib` for bibliography compilation.
+
+The workflow also prepares an editor-safe blinded package named `JFEI-blinded-review-package`. The uploaded artifact is:
+
+```text
+output/JFEI-blinded-review-package.zip
+```
+
+The package is assembled from only these files:
+
+```text
+JFEI-blinded-review-package/NLS-79.pdf
+JFEI-blinded-review-package/NLS-79.tex
+JFEI-blinded-review-package/references.bib
+```
+
+Before upload, the workflow strips common PDF metadata with `exiftool`, rejects package contents containing author/declaration identifiers, rejects forbidden file names such as title, declaration, author, cover, or submission files, verifies the ZIP is non-empty, and confirms the expected three package members are present.
 
 ## Data-use note
 
