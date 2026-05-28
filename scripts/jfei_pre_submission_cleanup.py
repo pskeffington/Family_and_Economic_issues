@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Apply JFEI double-anonymous pre-submission cleanup to the manuscript.
+"""Apply double-anonymous compliance cleanup to the manuscript source.
 
-This script avoids changing model estimates, citations, or tables. It applies only
-source-level review-package fixes: title and keyword normalization, declaration
-block removal, and double-anonymous reviewer-file guards.
+This script does not change scholarly content, model estimates, citations, tables,
+title wording, keywords, or interpretation. It only removes author/declaration
+material that should not appear in reviewer-facing files and checks that the
+reviewer manuscript remains anonymous.
 """
 
 from pathlib import Path
@@ -12,13 +13,6 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "NLS-79.tex"
-
-OLD_TITLE = "Financial Preparedness, Reproductive Education, and Completed Fertility: Evidence From the NLSY79"
-NEW_TITLE = "Financial Preparedness, Birth-Control Education, and Family Formation in the NLSY79"
-NEW_KEYWORDS = (
-    r"\noindent \textbf{Keywords:} fertility; family economics; financial literacy; "
-    r"emergency savings; birth-control education; NLSY79"
-)
 
 FORBIDDEN_BLINDED_TERMS = [
     "Paul A. Skeffington",
@@ -54,35 +48,27 @@ FORBIDDEN_PATTERNS = [
 
 
 def remove_declarations_block(text: str) -> str:
-    """Remove declarations or acknowledgement material from manuscript source."""
-    section_patterns = [
-        r"\n% \*{60}\n% STATEMENTS AND DECLARATIONS.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n% \*{60}\n% DECLARATIONS.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n% \*{60}\n% ACKNOWLEDGEMENTS.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n% \*{60}\n% ACKNOWLEDGMENTS.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n\\section\*\{Statements and Declarations\}.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n\\section\*\{Declarations\}.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n\\section\*\{Acknowledgements\}.*?(?=\n% \*{60}\n% REFERENCES)",
-        r"\n\\section\*\{Acknowledgments\}.*?(?=\n% \*{60}\n% REFERENCES)",
+    """Remove declaration, funding, and acknowledgement material only."""
+    anchor = r"(?=\n% \*{60}\n% REFERENCES|\n\\bibliographystyle|\n\\begin\{thebibliography\}|\n\\end\{document\})"
+    starts = [
+        r"\n% \*{60}\n% STATEMENTS AND DECLARATIONS",
+        r"\n% \*{60}\n% DECLARATIONS",
+        r"\n% \*{60}\n% ACKNOWLEDGEMENTS",
+        r"\n% \*{60}\n% ACKNOWLEDGMENTS",
+        r"\n\\section\*\{Statements and Declarations\}",
+        r"\n\\section\*\{Declarations\}",
+        r"\n\\section\*\{Acknowledgements\}",
+        r"\n\\section\*\{Acknowledgments\}",
+        r"\n\\section\*\{Funding\}",
     ]
-    for pattern in section_patterns:
-        text = re.sub(pattern, "\n", text, flags=re.S)
+    for start in starts:
+        text = re.sub(start + r".*?" + anchor, "\n", text, flags=re.S)
     return text
 
 
 def main() -> int:
     text = MANUSCRIPT.read_text(encoding="utf-8")
-
-    text = text.replace(r"\usepackage{hyperref}", r"\usepackage[hidelinks]{hyperref}")
-    text = text.replace(OLD_TITLE, NEW_TITLE)
-    text = re.sub(
-        r"\\noindent\s+\\textbf\{Keywords:\}.*",
-        lambda _match: NEW_KEYWORDS,
-        text,
-        count=1,
-    )
     text = remove_declarations_block(text)
-
     MANUSCRIPT.write_text(text, encoding="utf-8")
 
     violations = [term for term in FORBIDDEN_BLINDED_TERMS if term in text]
@@ -97,15 +83,7 @@ def main() -> int:
             print(f"- Forbidden pattern: {label}", file=sys.stderr)
         return 1
 
-    required = [NEW_TITLE, r"\usepackage[hidelinks]{hyperref}", NEW_KEYWORDS]
-    missing = [item for item in required if item not in text]
-    if missing:
-        print("Cleanup verification failed. Missing required source text:", file=sys.stderr)
-        for item in missing:
-            print(f"- {item}", file=sys.stderr)
-        return 1
-
-    print("JFEI double-anonymous pre-submission cleanup applied and verified.")
+    print("Double-anonymous compliance cleanup applied; no scholarly edits made.")
     return 0
 
 
