@@ -40,27 +40,27 @@ jobs:
       - name: Package root-level LaTeX source for Springer intake
         run: |
           rm -rf output
-          mkdir -p output/JFEI-manuscript-source-package
-          cp manuscript/NLS-79.tex output/JFEI-manuscript-source-package/manuscript.tex
-          cp manuscript/references.bib output/JFEI-manuscript-source-package/references.bib
-          file_count=$(find output/JFEI-manuscript-source-package -type f | wc -l)
+          mkdir -p output/JFEI-blinded-review-package
+          cp manuscript/NLS-79.tex output/JFEI-blinded-review-package/manuscript.tex
+          cp manuscript/references.bib output/JFEI-blinded-review-package/references.bib
+          file_count=$(find output/JFEI-blinded-review-package -type f | wc -l)
           test "$file_count" -eq 2
-          test -f output/JFEI-manuscript-source-package/manuscript.tex
-          test -f output/JFEI-manuscript-source-package/references.bib
-          grep -q '\\documentclass' output/JFEI-manuscript-source-package/manuscript.tex
-          cd output/JFEI-manuscript-source-package
-          zip -r ../JFEI-manuscript-source-package.zip manuscript.tex references.bib
+          test -f output/JFEI-blinded-review-package/manuscript.tex
+          test -f output/JFEI-blinded-review-package/references.bib
+          grep -q '\\documentclass' output/JFEI-blinded-review-package/manuscript.tex
+          cd output/JFEI-blinded-review-package
+          zip -r ../JFEI-blinded-review-package.zip manuscript.tex references.bib
           cd ..
-          zipinfo -1 JFEI-manuscript-source-package.zip
-          zipinfo -1 JFEI-manuscript-source-package.zip | grep -x "manuscript.tex"
-          zipinfo -1 JFEI-manuscript-source-package.zip | grep -x "references.bib"
-          test "$(zipinfo -1 JFEI-manuscript-source-package.zip | wc -l)" -eq 2
+          zipinfo -1 JFEI-blinded-review-package.zip
+          zipinfo -1 JFEI-blinded-review-package.zip | grep -x "manuscript.tex"
+          zipinfo -1 JFEI-blinded-review-package.zip | grep -x "references.bib"
+          test "$(zipinfo -1 JFEI-blinded-review-package.zip | wc -l)" -eq 2
 
       - name: Upload editor source package
         uses: actions/upload-artifact@v4
         with:
-          name: JFEI-manuscript-source-package
-          path: output/JFEI-manuscript-source-package.zip
+          name: JFEI-blinded-review-package
+          path: output/JFEI-blinded-review-package.zip
           if-no-files-found: error
 
 # Springer intake package contract: root-level manuscript.tex and references.bib only.
