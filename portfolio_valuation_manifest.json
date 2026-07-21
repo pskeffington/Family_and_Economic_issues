@@ -1,0 +1,21 @@
+{
+  "schema_version":"portfolio-valuation-manifest/v1",
+  "repository":"pskeffington/Family_and_Economic_issues",
+  "portfolio_valuator":"pskeffington/Portfolio",
+  "valuation_status":"aligned_internal_estimate",
+  "market_lane":"public-health research / emergency preparedness",
+  "maturity_stage":"manuscript-ready",
+  "evidence_grade":"B",
+  "product_surface":"manuscript_report_scaffold",
+  "integration_role":"longitudinal economics and social-determinants research asset",
+  "public_safety_status":"clean",
+  "risk_level":"medium",
+  "current_value_range_usd":{"low":50000,"high":300000},
+  "forward_value_range_usd":{"low":500000,"high":2000000},
+  "collateral_treatment":"Research asset only; apply publication, reproducibility, rights, market adoption, and liquidation discounts.",
+  "evidence_paths":["README.md","portfolio_valuation_manifest.json"],
+  "next_value_unlocks":["complete evidence ledger","track publication status","produce reproducible analytical outputs"],
+  "missing_financial_inputs":["revenue","licensing","publication acceptance","external validation","independent appraisal"],
+  "claim_boundary":"No policy-effectiveness, causal, institutional, or revenue claim beyond documented evidence.",
+  "last_aligned_on":"2026-07-21"
+}
