@@ -2,9 +2,15 @@
 
 **Status:** JFEI pre-submission cleanup / blinded-package review.  
 **Maintainer:** Paul Skeffington, MS, MPH  
-**Last documentation refresh:** 2026-05-26
+**Last documentation refresh:** 2026-08-17
 
 LaTeX manuscript repository for research on family formation, financial preparedness, birth-control education, and completed fertility using the National Longitudinal Survey of Youth 1979 (NLSY79).
+
+## Public-interest research boundary
+
+This repository is maintained for social-science scholarship, reproducible demographic research, transparent statistical analysis, and manuscript preparation using public-use longitudinal data.
+
+It does not provide individual-level fertility guidance, financial advice, clinical recommendations, automated eligibility or risk decisions, causal claims beyond the supported study design, or policy mandates. Findings should be interpreted as bounded research results subject to model assumptions, sample construction, measurement limitations, and peer review.
 
 ## Current manuscript
 
@@ -12,9 +18,14 @@ LaTeX manuscript repository for research on family formation, financial prepared
 
 This repository is in pre-submission form. It is organized for reproducible drafting, contributor review, citation verification, model-output audit, and automated LaTeX compilation. The manuscript should not be treated as a final journal submission package until the pre-submission checklist below is complete.
 
-## Current update — 2026-05-26
+## Current research status
 
-The repository remains in JFEI pre-submission cleanup and blinded-package review. The immediate documentation priority is to keep `REPRODUCIBILITY.md`, `CITATION.cff`, `references.bib`, generated tables, and the blinded manuscript synchronized while preserving the separation between blinded review files and author-identifying submission materials.
+- Stage: pre-submission manuscript cleanup and blinded-package review
+- Evidence status: reproducible analysis outputs available; journal review and final citation/model checks pending
+- Data status: public-use NLSY79 extracts obtained outside Git and governed by source terms
+- Primary limitation: manuscript claims remain subject to sample-definition, model-specification, measurement, and peer-review limits
+
+The immediate documentation priority is to keep `REPRODUCIBILITY.md`, `CITATION.cff`, `references.bib`, generated tables, and the blinded manuscript synchronized while preserving the separation between blinded review files and author-identifying submission materials.
 
 ## Repository structure
 
@@ -147,7 +158,7 @@ Generated upload bundles or exported Word/PDF files may be created locally under
 
 ## Documentation and review standards
 
-This repository should follow the science-repository pattern in `Best-Practices-Git`: explicit status language, raw-data exclusion, reproducible execution notes, source-verification records, and manuscript-claim traceability.
+This repository should follow the science-repository pattern in `Best-Practices-Git`: explicit status language, raw-data exclusion, reproducible execution notes, source-verification records, manuscript-claim traceability, and clear limits on interpretation.
 
 Current documentation priorities:
 
@@ -156,6 +167,7 @@ Current documentation priorities:
 - Keep generated tables traceable to the analysis script and manuscript text.
 - Maintain a clear boundary between blinded manuscript files and author-identifying submission materials.
 - Preserve NLSY79 public-use data restrictions by excluding raw extracts from Git.
+- Keep substantive claims tied to documented model specifications, samples, sensitivity checks, and limitations.
 
 ## Pre-submission checklist
 
@@ -166,10 +178,11 @@ Current documentation priorities:
 - Confirm `references.bib` has verified metadata, DOI links where available, and title capitalization appropriate for the target journal.
 - Confirm no raw NLSY79 extract files are committed.
 - Confirm `REPRODUCIBILITY.md`, `CITATION.cff`, and `LICENSE` are current.
+- Confirm conclusions remain within the supported observational and modeling evidence.
 
 ## Contributor priorities
 
-Current priorities are citation verification, LaTeX compilation stability, table reproducibility, model-output alignment, journal-format cleanup, and transparent documentation of analytic limitations.
+Current priorities are citation verification, LaTeX compilation stability, table reproducibility, model-output alignment, journal-format cleanup, transparent documentation of analytic limitations, and source-bounded interpretation.
 
 ## Notes
 
